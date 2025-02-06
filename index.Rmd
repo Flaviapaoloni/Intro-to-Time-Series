@@ -18,10 +18,9 @@ site: bookdown::bookdown_site
  **Cross section**: data on different entities (workers, consumers, firms, etc.)
 collected at a single time period (e.g. number of inhabitants per postcode in 2010).
 
-<img src="/Users/flaviapaoloni/Desktop/PhD UvA/cross.png" alt="Cross-section data" width="50%">
 
-```{r, eco=FALSE}
-knitr::include_graphics("/Users/flaviapaoloni/Desktop/PhD UvA/cross.png")
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cross.png")
 ```
 \begin{figure}
     \centering
