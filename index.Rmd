@@ -307,7 +307,8 @@ knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/rw.
  
 
 # How to deal with a non-stationary process? 
-    The RW is a simple nonstationary process.\footnote{Non-stationary data: time-series data with mean value that can either rise or fall over time.}
+
+The RW is a simple nonstationary process. ^[Non-stationary process: time-series data with mean value that can either rise or fall over time.]
      
 
 The accumulation of random shocks, $\epsilon_t$, creates a stochastic trend.
