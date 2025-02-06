@@ -31,6 +31,9 @@ knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cro
 
 **Times series**: data for a single entity (person, firm, country, etc.) collected at
 multiple time periods (e.g. GDP in the Netherlands).
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/gdp.png")
+```
 
 \begin{figure}
     \centering
@@ -43,12 +46,13 @@ multiple time periods (e.g. GDP in the Netherlands).
 **Panel data**: data for multiple entities in which each entry is observed at
 two or more time periods (e.g. number of inhabitants in postcodes over time).
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{figures/kwb.png}
-    \caption{Panel data: time variable $\rightarrow$ year, ID variable $\rightarrow$ postcode}
-    \label{fig:kwb}
-\end{figure}
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/kwb.png")
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cw-historical-ghg-emissions.png")
+```
 
 ## Time Series
 
@@ -102,7 +106,11 @@ White noise (WN) process: $\epsilon_t$ is a time series with the following chara
     \text{$\mathbb{C}$ov}(\epsilon_t, \epsilon_{t-k})&=\gamma(k) =0 \;\;\;\;\;\;\;\; \text{for k}>0
 \end{align}
 
-The autocovariance $\gamma(k)$ of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: $\epsilon_t$ is not similar or influenced by $\epsilon_{t-k}$
+The autocovariance $\gamma(k)$ of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: $\epsilon_t$ is not similar or influenced by $\epsilon_{t-k}$.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/wn.pdf")
+```
 
 ## Moving Average
 Moving Average (MA) process: the time series $y_t$ depends on the current and the past values of the error term $\epsilon_t$.
@@ -163,6 +171,11 @@ Note: $y_{t-1} = \mu + \epsilon_{t-1}+ \theta \epsilon_{t-2}$. \\ Assume that th
 $$\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\theta\text{$\mathbb{V}$ar}(\epsilon_{t-1})= \theta \sigma^2$$
 $$\text{$\mathbb{C}$ov}(y_t, y_{t-k})=\gamma(k)=0 \;\;\;\; \text{for} \;\;  k>1$$
 
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ma.pdf")
+```
+
+
 ## Autoregressive process
 
 Autoregressive (AR) process: the time series $y_t$ depends on its previous values and on an error term $\epsilon_t$.\medskip
@@ -207,7 +220,9 @@ Notice that\\ $\text{$\mathbb{C}$ov}(\phi y_{t-1}, y_{t-1})=\phi \text{$\mathbb{
 
  \end{itemize}
 
-
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ar.pdf")
+```
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/ar.pdf}
@@ -264,7 +279,9 @@ Notice that ARMA(1,0) is an AR(1) and ARMA(0,1) is an MA(1).
 \end{figure}   
 
 
-
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/arma.pdf")
+```
 
 ## Random Walk
 
@@ -305,8 +322,9 @@ $$\text{$\mathbb{C}$ov}(y_t, y_{t-h})=\text{$\mathbb{V}$ar}(y_{t-h})= (t-h)\sigm
 The variance increases with $t$ \\$\implies$ the variance depends on time \\$\implies$ non-stationary process.
 \end{frame}
 
-
-\begin{frame}{RW - Example}
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/rw.pdf")
+```
 
 \begin{figure}
     \centering
@@ -314,7 +332,6 @@ The variance increases with $t$ \\$\implies$ the variance depends on time \\$\im
    % \caption*{\small The coefficient $\phi$ is set to 0.7}
     %\label{fig:my_label}
 \end{figure}   
-\end{frame}
 
 # How to deal with a non-stationary process? 
     The RW is a simple nonstationary process.\footnote{Non-stationary data: time-series data with mean value that can either rise or fall over time.}
@@ -371,6 +388,10 @@ The $t$-test follows a Student t-distribution, while the DF test follows a \text
 
 ## Impulse Response Function
 The Impulse Response Function, $\widetilde{y}_{t}$, describes the expected response of a variable to an exogenous shock, which occurs at time $t=s$. The shock could be of magnitude 1 or one standard deviation.
+
+```{r, echo=FALSE}
+knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/irfshock.png")
+```
 
 \begin{figure}
     \centering
