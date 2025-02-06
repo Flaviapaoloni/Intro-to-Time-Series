@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 How to deal with a non-stationary process? | Introduction to Time Series</title>
+  <meta name="description" content="Chapter 3 How to deal with a non-stationary process? | Introduction to Time Series" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 How to deal with a non-stationary process? | Introduction to Time Series" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 How to deal with a non-stationary process? | Introduction to Time Series" />
+  
+  
+  
+
+<meta name="author" content="Flavia Paoloni" />
+
+
+<meta name="date" content="2025-02-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="time-series-processes.html"/>
+<link rel="next" href="analysis-of-economic-variables.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Time Series</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#types-of-data"><i class="fa fa-check"></i><b>1.1</b> Types of data</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#time-series"><i class="fa fa-check"></i><b>1.2</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#time-series-properties"><i class="fa fa-check"></i><b>1.2.1</b> Time Series properties</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="time-series-processes.html"><a href="time-series-processes.html"><i class="fa fa-check"></i><b>2</b> Time Series Processes</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="time-series-processes.html"><a href="time-series-processes.html#moving-average"><i class="fa fa-check"></i><b>2.1</b> Moving Average</a></li>
+<li class="chapter" data-level="2.2" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive process</a></li>
+<li class="chapter" data-level="2.3" data-path="time-series-processes.html"><a href="time-series-processes.html#wold-representation-theorem"><i class="fa fa-check"></i><b>2.3</b> Wold Representation Theorem</a></li>
+<li class="chapter" data-level="2.4" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-moving-average-process"><i class="fa fa-check"></i><b>2.4</b> Autoregressive Moving Average Process</a></li>
+<li class="chapter" data-level="2.5" data-path="time-series-processes.html"><a href="time-series-processes.html#random-walk"><i class="fa fa-check"></i><b>2.5</b> Random Walk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html"><i class="fa fa-check"></i><b>3</b> How to deal with a non-stationary process?</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html#dickey-fuller-test"><i class="fa fa-check"></i><b>3.1</b> Dickey-Fuller test</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html"><i class="fa fa-check"></i><b>4</b> Analysis of Economic Variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#impulse-response-function"><i class="fa fa-check"></i><b>4.1</b> Impulse Response Function</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#local-projections"><i class="fa fa-check"></i><b>4.2</b> Local Projections</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>5</b> The pool of tears</a></li>
+<li class="chapter" data-level="6" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>6</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Time Series</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="how-to-deal-with-a-non-stationary-process" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> How to deal with a non-stationary process?<a href="how-to-deal-with-a-non-stationary-process.html#how-to-deal-with-a-non-stationary-process" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<pre><code>The RW is a simple nonstationary process.\footnote{Non-stationary data: time-series data with mean value that can either rise or fall over time.}
+\medskip</code></pre>
+<p>The accumulation of random shocks, <span class="math inline">\(\epsilon_t\)</span>, creates a stochastic trend.</p>
+<p>This causes the non-stationarity.</p>
+<p>To solve this problem, a solution is to take the first difference: <span class="math inline">\(\Delta y_t=y_t - y_{t-1}\)</span>.\
+The first difference of a random walk process would be the white noise:
+<span class="math display">\[\begin{align*}
+    \Delta y_t&amp;=y_t - y_{t-1}=\epsilon_t
+\end{align*}\]</span></p>
+<p>Assume the data follow an AR(1) process:
+<span class="math display">\[\begin{align*}
+    y_t&amp;=\phi y_{t-1}+\epsilon_t
+\end{align*}\]</span>
+: the coefficient <span class="math inline">\(\phi\)</span>. Is it equal to 1 (unit root) or smaller than 1?</p>
+<p>We can use the Dickey-Fuller (DF) test to check for stationarity and answer this question.</p>
+<div id="dickey-fuller-test" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Dickey-Fuller test<a href="how-to-deal-with-a-non-stationary-process.html#dickey-fuller-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+The Dickey-Fuller test tests the null hypothesis of <span class="math inline">\(\phi\)</span> being equal to 1, against the alternative hypothesis of <span class="math inline">\(\phi\)</span> being lower than 1. Using a compact notation, DF tests\
+<p>The DF test is similar to the <span class="math inline">\(t\)</span>-test
+<span class="math display">\[\begin{align*}
+    DF&amp;=\frac{\hat{\phi}-1}{SE(\hat{\phi})}
+\end{align*}\]</span>
+where <span class="math inline">\(\hat{\phi}\)</span> is the parameter <span class="math inline">\(\phi\)</span> of AR(1) estimated using OLS. \
+The <span class="math inline">\(t\)</span>-test follows a Student t-distribution, while the DF test follows a .</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="time-series-processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-of-economic-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/blob/main/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

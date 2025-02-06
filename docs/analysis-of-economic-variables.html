@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Analysis of Economic Variables | Introduction to Time Series</title>
+  <meta name="description" content="Chapter 4 Analysis of Economic Variables | Introduction to Time Series" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Analysis of Economic Variables | Introduction to Time Series" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Analysis of Economic Variables | Introduction to Time Series" />
+  
+  
+  
+
+<meta name="author" content="Flavia Paoloni" />
+
+
+<meta name="date" content="2025-02-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="how-to-deal-with-a-non-stationary-process.html"/>
+<link rel="next" href="the-pool-of-tears.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Time Series</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#types-of-data"><i class="fa fa-check"></i><b>1.1</b> Types of data</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#time-series"><i class="fa fa-check"></i><b>1.2</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#time-series-properties"><i class="fa fa-check"></i><b>1.2.1</b> Time Series properties</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="time-series-processes.html"><a href="time-series-processes.html"><i class="fa fa-check"></i><b>2</b> Time Series Processes</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="time-series-processes.html"><a href="time-series-processes.html#moving-average"><i class="fa fa-check"></i><b>2.1</b> Moving Average</a></li>
+<li class="chapter" data-level="2.2" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive process</a></li>
+<li class="chapter" data-level="2.3" data-path="time-series-processes.html"><a href="time-series-processes.html#wold-representation-theorem"><i class="fa fa-check"></i><b>2.3</b> Wold Representation Theorem</a></li>
+<li class="chapter" data-level="2.4" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-moving-average-process"><i class="fa fa-check"></i><b>2.4</b> Autoregressive Moving Average Process</a></li>
+<li class="chapter" data-level="2.5" data-path="time-series-processes.html"><a href="time-series-processes.html#random-walk"><i class="fa fa-check"></i><b>2.5</b> Random Walk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html"><i class="fa fa-check"></i><b>3</b> How to deal with a non-stationary process?</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html#dickey-fuller-test"><i class="fa fa-check"></i><b>3.1</b> Dickey-Fuller test</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html"><i class="fa fa-check"></i><b>4</b> Analysis of Economic Variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#impulse-response-function"><i class="fa fa-check"></i><b>4.1</b> Impulse Response Function</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#local-projections"><i class="fa fa-check"></i><b>4.2</b> Local Projections</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>5</b> The pool of tears</a></li>
+<li class="chapter" data-level="6" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>6</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Time Series</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis-of-economic-variables" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Analysis of Economic Variables<a href="analysis-of-economic-variables.html#analysis-of-economic-variables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Exogenous shocks are unpredictable events affecting a system of variables. For example, a monetary policy shock affects a country’s output and inflation.</p>
+<p>ARMA models are useful to analyse the response of economic variables to these shocks.</p>
+<p> estimate the expected response of these variables, modelled with ARMA processes, to a shock.</p>
+<div id="impulse-response-function" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Impulse Response Function<a href="analysis-of-economic-variables.html#impulse-response-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Impulse Response Function, <span class="math inline">\(\widetilde{y}_{t}\)</span>, describes the expected response of a variable to an exogenous shock, which occurs at time <span class="math inline">\(t=s\)</span>. The shock could be of magnitude 1 or one standard deviation.</p>
+<p>A 1% shock in the interest rate/monetary policy decreases GDP for the first 6 months. After 6 months, GDP starts increasing again.</p>
+<p>The value of the variable before the shock happens is a fixed value <span class="math inline">\(y\)</span>.</p>
+<p>The IRFs are given by the following set of equations:
+<span class="math display">\[\begin{align}
+    \widetilde{y}_t&amp;=y \;\;\;\;\; \forall t&lt;s\\
+    \widetilde{y}_t&amp;=y+\frac{\partial y_t}{\partial \epsilon_s}\cdot 1 \;\;\;\;\; \forall t\geq s\\\label{eq:partirf}
+\end{align}\]</span></p>
+<p><a href="#eq:partirf">(<strong>??</strong>)</a>.</p>
+<p>: the response of the time series <span class="math inline">\(y\)</span> to this exogenous shock. \
+Assume the time series is modelled as an AR(1)
+<span class="math display">\[\begin{align*}
+    y_t&amp;=\phi y_{t-1}+\epsilon_t
+\end{align*}\]</span>
+At time <span class="math inline">\(t\)</span> there is a shock of magnitude 1.</p>
+<p>We estimate the expected behaviour of <span class="math inline">\(y\)</span> in the next three periods using the Impulse Response Function.
+</p>
+<p>At time <span class="math inline">\(t+1\)</span>, the next period, the AR(1) is given by:
+<span class="math display">\[\begin{align}
+    y_{t+1}&amp;=\phi_1 y_{t}+\epsilon_{t+1}
+\end{align}\]</span>
+Substitute <span class="math inline">\(y_t\)</span>:
+<span class="math display">\[\begin{align}
+    y_{t+1}&amp;=\phi (\phi y_{t-1}+\epsilon_t)+\epsilon_{t+1}=\phi^2 y_{t-1}+\phi\epsilon_t+\epsilon_{t+1}
+\end{align}\]</span></p>
+<p>Then, the effect of the shock on the time series is the partial derivative of <span class="math inline">\(y_t\)</span> with respect to <span class="math inline">\(\epsilon_t\)</span>:
+<span class="math display">\[\begin{align}
+    \frac{\partial y_{t+1}}{\partial\epsilon_t}&amp;=\phi
+\end{align}\]</span>
+So, the response of <span class="math inline">\(y_t\)</span> one period after the shock occurred is
+<span class="math display">\[\begin{align}
+    \widetilde{y}_{t+1}&amp;=y+\frac{\partial y_{t+1}}{\partial \epsilon_t}\cdot 1= y+\phi \cdot 1
+\end{align}\]</span></p>
+<p>Repeat the process for two and three periods after the shock.\
+After two periods, <span class="math inline">\(t+2\)</span>,
+<span class="math display">\[\begin{align}
+    y_{t+2}&amp;=\phi^3 y_{t-1}+\phi^2\epsilon_t+\phi\epsilon_{t+1} +\epsilon_{t+2}\\
+    \frac{\partial y_{t+2}}{\partial\epsilon_t}&amp;=\phi^2
+\end{align}\]</span>
+Then, the IRF after two periods is
+<span class="math display">\[\begin{align}
+    \widetilde{y}_{t+2}&amp;=y+\phi^2 \cdot 1
+\end{align}\]</span>
+Similarly for the IRF after three steps ahead: <span class="math inline">\(\widetilde{y}_{t+3}=y+\phi^3 \cdot 1\)</span>.</p>
+<p>Alternatively, use the Wold representation theorem (see ):
+<span class="math display">\[\begin{align}
+    y_t&amp;=\phi y_{t-1}+\epsilon_t \rightarrow y_t=\sum_{j=0}^{\infty}\psi_j\epsilon_{t-j}
+\end{align}\]</span>
+where we use the substitution <span class="math inline">\(\psi_j=\phi^j\)</span>.\
+Then, we get:
+<span class="math display">\[\begin{align}
+         \frac{\partial y_{t}}{\partial\epsilon_s}&amp;=\psi_{t-s}=\phi^{t-s}
+    \end{align}\]</span>
+The IRFs at 1,2, and 3 steps ahead are given by:
+<span class="math display">\[\begin{align}
+    \tilde{y}_{t+1}&amp;=y+\frac{\partial y_{t+1}}{\partial\epsilon_s}\cdot 1= y+\psi_1=y+\phi\\
+    \tilde{y}_{t+2}&amp;=y+\frac{\partial y_{t+2}}{\partial\epsilon_s}\cdot 1= y+\psi_2=y+\phi^2\\
+    \tilde{y}_{t+3}&amp;=y+\frac{\partial y_{t+3}}{\partial\epsilon_s}\cdot 1= y+\psi_3=y+\phi^3
+\end{align}\]</span>
+\end{frame}</p>
+Notice two aspects.
+<p> models compute IRFs, including multiple variables and addressing the misspecification issue.</p>
+</div>
+<div id="local-projections" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Local Projections<a href="analysis-of-economic-variables.html#local-projections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Local Projection (LP) methods are useful to compute IRFs addressing possible misspecification in the model and considering multiple variables. </p>
+This method estimates a regression for each variable and for each step ahead <span class="math inline">\(s\)</span>.
+<p>The LP specification for <span class="math inline">\(y_t\)</span> at step ahead <span class="math inline">\(s\)</span> is:
+<span class="math display">\[\begin{align}\label{lp}
+    y_{t+s}&amp;=\beta_s x_t+\sum_{j=1}^l \gamma_{s,l}^{\prime}y_{t-l}+\sum_{j=1}^l\delta_{s,l}^{\prime}x_{t-l}+\epsilon_{t+s}
+\end{align}\]</span>
+<span class="math inline">\(y_{t+s}\)</span> includes both the lags of <span class="math inline">\(y_t\)</span> and of <span class="math inline">\(x_t\)</span> (second and term terms on the RHS).</p>
+<p>Let <span class="math inline">\(y_t\)</span> be real GDP of country <span class="math inline">\(C\)</span> and <span class="math inline">\(x_t\)</span> real interest rate. \
+Assume the interest rate increases suddenly. \
+Our goal is to estimate the effect of this increase on GDP in the next quarters/years.\
+At time <span class="math inline">\(t+1\)</span>, estimate the regression in eq. <span class="math inline">\(\eqref{lp}\)</span> with 1 lag using OLS:
+<span class="math display">\[\begin{align}
+    y_{t+1}&amp;=\beta_1 x_t+ \gamma_{1,1}y_{t-1}+\delta_{1,1}x_{t-1}+\epsilon_{t+1}
+\end{align}\]</span>
+Repeat for estimating the effect at time <span class="math inline">\(t+2\)</span>:
+<span class="math display">\[\begin{align}
+    y_{t+2}&amp;=\beta_2 x_t+ \gamma_{2,1}y_{t-1}+\delta_{2,1}x_{t-1}+\epsilon_{t+1}
+\end{align}\]</span>
+And so on. In the end, the coefficients <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span> estimate the effect of an increase today in interest rate on GDP over the future periods.</p>
+<p>: the estimated <span class="math inline">\(\beta_s\)</span>. \
+<span class="math inline">\(\beta_s\)</span> represents the impact of the shock on the variable <span class="math inline">\(y_t\)</span> - so it is the Local Projection impulse response.</p>
+<p>Estimate the equations for both time series and for each step ahead <span class="math inline">\(s=1,2,3,\ldots\)</span> using OLS. </p>
+<p>For each horizon <span class="math inline">\(s\)</span>, the LP impulse response, <span class="math inline">\(\beta_s\)</span>, is given by the difference between the expected value of <span class="math inline">\(y_{t+s}\)</span> if the shock has occurred and if it has not:
+<span class="math display">\[\begin{equation}
+    \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbbE(y_{t+s} |x_t =0,y_t,x_t)
+\end{equation}\]</span>
+: when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="how-to-deal-with-a-non-stationary-process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pool-of-tears.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/blob/main/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

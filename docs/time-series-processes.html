@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Time Series Processes | Introduction to Time Series</title>
+  <meta name="description" content="Chapter 2 Time Series Processes | Introduction to Time Series" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Time Series Processes | Introduction to Time Series" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Time Series Processes | Introduction to Time Series" />
+  
+  
+  
+
+<meta name="author" content="Flavia Paoloni" />
+
+
+<meta name="date" content="2025-02-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="how-to-deal-with-a-non-stationary-process.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to Time Series</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#types-of-data"><i class="fa fa-check"></i><b>1.1</b> Types of data</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#time-series"><i class="fa fa-check"></i><b>1.2</b> Time Series</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#time-series-properties"><i class="fa fa-check"></i><b>1.2.1</b> Time Series properties</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="time-series-processes.html"><a href="time-series-processes.html"><i class="fa fa-check"></i><b>2</b> Time Series Processes</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="time-series-processes.html"><a href="time-series-processes.html#moving-average"><i class="fa fa-check"></i><b>2.1</b> Moving Average</a></li>
+<li class="chapter" data-level="2.2" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive process</a></li>
+<li class="chapter" data-level="2.3" data-path="time-series-processes.html"><a href="time-series-processes.html#wold-representation-theorem"><i class="fa fa-check"></i><b>2.3</b> Wold Representation Theorem</a></li>
+<li class="chapter" data-level="2.4" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-moving-average-process"><i class="fa fa-check"></i><b>2.4</b> Autoregressive Moving Average Process</a></li>
+<li class="chapter" data-level="2.5" data-path="time-series-processes.html"><a href="time-series-processes.html#random-walk"><i class="fa fa-check"></i><b>2.5</b> Random Walk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html"><i class="fa fa-check"></i><b>3</b> How to deal with a non-stationary process?</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html#dickey-fuller-test"><i class="fa fa-check"></i><b>3.1</b> Dickey-Fuller test</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html"><i class="fa fa-check"></i><b>4</b> Analysis of Economic Variables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#impulse-response-function"><i class="fa fa-check"></i><b>4.1</b> Impulse Response Function</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-economic-variables.html"><a href="analysis-of-economic-variables.html#local-projections"><i class="fa fa-check"></i><b>4.2</b> Local Projections</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="the-pool-of-tears.html"><a href="the-pool-of-tears.html"><i class="fa fa-check"></i><b>5</b> The pool of tears</a></li>
+<li class="chapter" data-level="6" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>6</b> A caucus-race and a long tale</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Time Series</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="time-series-processes" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Time Series Processes<a href="time-series-processes.html#time-series-processes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The time series models we discuss are:</p>
+White noise (WN)
+Moving Average (MA)
+Autoregressive (AR)
+Random Walk (RW)
+<p>Autoregressive Moving Average (ARMA)
+## White Noise
+White noise (WN) process: <span class="math inline">\(\epsilon_t\)</span> is a time series with the following characteristics
+<span class="math display">\[\begin{align}
+    \mathbb{E}(\epsilon_t)&amp;=0\\
+    \text{$\mathbb{V}$ar}(\epsilon_t)&amp;=\mathbb{E}(\epsilon_t^2)=\sigma^2 &lt; \infty\\
+    \text{$\mathbb{C}$ov}(\epsilon_t, \epsilon_{t-k})&amp;=\gamma(k) =0 \;\;\;\;\;\;\;\; \text{for k}&gt;0
+\end{align}\]</span></p>
+<p>The autocovariance <span class="math inline">\(\gamma(k)\)</span> of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: <span class="math inline">\(\epsilon_t\)</span> is not similar or influenced by <span class="math inline">\(\epsilon_{t-k}\)</span></p>
+<div id="moving-average" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Moving Average<a href="time-series-processes.html#moving-average" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Moving Average (MA) process: the time series <span class="math inline">\(y_t\)</span> depends on the current and the past values of the error term <span class="math inline">\(\epsilon_t\)</span>.</p>
+<p>Consider that <span class="math inline">\(y_t\)</span> depends on the first lag of <span class="math inline">\(\epsilon_t\)</span>, <span class="math inline">\(\epsilon_{t-1}\)</span>. \
+Then, the time series follows a moving average process of order 1, denoted MA(1):
+<span class="math display">\[\begin{equation*}
+    y_t=\mu+\epsilon_t+\theta \epsilon_{t-1}, \;\;\;\;\;\; \epsilon_t\sim \mathcal{N}(0,\sigma^2)
+\end{equation*}\]</span>
+where <span class="math inline">\(\mu\)</span> is an constant, <span class="math inline">\(\sigma^2\)</span> is the variance of <span class="math inline">\(\epsilon_t\)</span>.</p>
+Consider that <span class="math inline">\(y_t\)</span> depends on the <span class="math inline">\(q\)</span> lags of <span class="math inline">\(\epsilon_t\)</span>. Then, the moving average process is of order <span class="math inline">\(q\)</span>, MA(q).
+<span class="math display">\[\begin{equation*}
+    y_t=\mu+\epsilon_t+\theta \epsilon_{t-1}+\ldots+\theta_q \epsilon_{t-q}
+\end{equation*}\]</span>
+Stationarity condition holds.
+<p><span class="math display">\[\gamma(1) = \text{$\mathbb{C}$ov}(\mu+\epsilon_t+\theta \epsilon_{t-1}, y_{t-1})\]</span></p>
+<p>Note: <span class="math inline">\(y_{t-1} = \mu + \epsilon_{t-1}+ \theta \epsilon_{t-2}\)</span>. \ Assume that the error terms are serially independent, i.e.~<span class="math inline">\(\epsilon_t \perp \epsilon_{t-k} \;\; \forall k\geq1\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+\text{$\mathbb{C}$ov}(\mu&amp;+\epsilon_t+\theta \epsilon_{t-1}, y_{t-1}) =\\
+\text{$\mathbb{C}$ov}(\mu, y_{t-1})+&amp;\text{$\mathbb{C}$ov}(\epsilon, y_{t-1})+ \text{$\mathbb{C}$ov}(\theta\epsilon_{t-1}, y_{t-1})
+\end{align*}\]</span></p>
+<p><span class="math display">\[\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\theta\text{$\mathbb{V}$ar}(\epsilon_{t-1})= \theta \sigma^2\]</span>
+<span class="math display">\[\text{$\mathbb{C}$ov}(y_t, y_{t-k})=\gamma(k)=0 \;\;\;\; \text{for} \;\;  k&gt;1\]</span></p>
+</div>
+<div id="autoregressive-process" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Autoregressive process<a href="time-series-processes.html#autoregressive-process" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Autoregressive (AR) process: the time series <span class="math inline">\(y_t\)</span> depends on its previous values and on an error term <span class="math inline">\(\epsilon_t\)</span>.</p>
+<p>Consider that <span class="math inline">\(y_t\)</span> depends only on its first lag and on <span class="math inline">\(\epsilon_t\)</span>. Then, the time series follows an autoregressive process of order 1, denoted AR(1):
+<span class="math display">\[\begin{equation*}
+    y_t=\mu+\phi y_{t-1}+\epsilon_t, \;\;\;\;\;\; \epsilon_t\sim \mathcal{N}(0,\sigma^2)
+\end{equation*}\]</span>
+where <span class="math inline">\(\mu\)</span> is an intercept, <span class="math inline">\(\sigma^2\)</span> is the variance of <span class="math inline">\(\epsilon_t\)</span>.\
+</p>
+<p>Consider that <span class="math inline">\(y_t\)</span> depends on its <span class="math inline">\(p\)</span> past values. Then, the autoregressive process is of order <span class="math inline">\(p\)</span>, AR(p).</p>
+<p><span class="math display">\[y_t=\mu+\phi y_{t-1}+\ldots+\phi_p y_{t-p}+\epsilon_t\]</span>
+</p>
+<p> The stationarity condition holds <span class="math inline">\(|\phi|\)</span> is lower than 1.</p>
+<p>Let’s consider an AR(1) process. Its statistical properties are:</p>
+<p>\end{frame}</p>
+</div>
+<div id="wold-representation-theorem" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Wold Representation Theorem<a href="time-series-processes.html#wold-representation-theorem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A (covariance) stationary time series <span class="math inline">\(y_t\)</span> can be represented as a Moving Average process of order infinity, MA(<span class="math inline">\(\infty\)</span>):
+<span class="math display">\[\begin{align*}
+    y_t&amp;=\sum_{j=0}^\infty\psi_j\epsilon_{t-j}
+\end{align*}\]</span>
+To see how, consider an AR(1) process:
+<span class="math display">\[\begin{align*}\label{ar1}
+    y_t&amp;=\phi y_{t-1}+\epsilon_t
+\end{align*}\]</span>
+Substitute <span class="math inline">\(y_{t-1}\)</span>:
+<span class="math display">\[\begin{align*}
+    y_t&amp;=\phi^2 y_{t-2}+ \phi \epsilon_{t-1} +\epsilon_t
+\end{align*}\]</span>
+Recursively substitute <span class="math inline">\(y_{t-2}\)</span> to <span class="math inline">\(y_{t-j}\)</span>, until you get:
+<span class="math display">\[\begin{align*}
+    y_t&amp;=\phi^j \epsilon_{t-j}+ \ldots + \phi \epsilon_{t-1} +\epsilon_t= \sum_{j=0}^\infty \psi_j \epsilon_{t-j}
+\end{align*}\]</span>
+where <span class="math inline">\(\psi_j =\phi^j\)</span> and <span class="math inline">\(\sum_{j=0}^\infty|\psi_j|&lt;\infty\)</span>.</p>
+</div>
+<div id="autoregressive-moving-average-process" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Autoregressive Moving Average Process<a href="time-series-processes.html#autoregressive-moving-average-process" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Autoregressive Moving Average (ARMA) process: the time series <span class="math inline">\(y_t\)</span> is formed by an autoregressive component and a moving average one.</p>
+<p>The representation of ARMA(1,1) combines AR(1) and MA(1):
+<span class="math display">\[ y_t=\phi y_{t-1}+\epsilon_t+\theta \epsilon_{t-1}\]</span></p>
+<p>The ARMA process of order (p,q) is:</p>
+<p><span class="math display">\[y_t=\phi_1 y_{t-1}+\ldots+\phi_p y_{t-p}+\epsilon_t+\theta_1 \epsilon_{t-1}+\ldots+\theta_q \epsilon_{t-q}\]</span></p>
+<p> The stationarity condition holds <span class="math inline">\(|\phi|\)</span> is lower than 1.</p>
+<p>Notice that ARMA(1,0) is an AR(1) and ARMA(0,1) is an MA(1).</p>
+</div>
+<div id="random-walk" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Random Walk<a href="time-series-processes.html#random-walk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If the parameter <span class="math inline">\(\phi=1\)</span>, the process is a random walk (RW):
+<span class="math display">\[\begin{align*}
+    y_t&amp;=y_{t-1}+\epsilon_t
+\end{align*}\]</span></p>
+This time series is a sum of random shocks <span class="math inline">\(\epsilon_t\)</span> with <span class="math inline">\(t\)</span> from time 1 until <span class="math inline">\(t\)</span>.
+<p>Repeat steps and for all <span class="math inline">\(t\)</span> until you get:
+<span class="math display">\[y_t=\epsilon_1+\ldots+\epsilon_t\]</span></p>
+<p> The stationarity condition hold (see next slide).</p>
+<p>Note that <span class="math inline">\(\epsilon_t \; \forall t\)</span> is a white noise process, <span class="math inline">\(\epsilon_t \sim \mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p>The variance increases with <span class="math inline">\(t\)</span> <span class="math inline">\(\implies\)</span> the variance depends on time <span class="math inline">\(\implies\)</span> non-stationary process.</p>
+<p>\</p>
+<p>The variance increases with <span class="math inline">\(t\)</span> \<span class="math inline">\(\implies\)</span> the variance depends on time \<span class="math inline">\(\implies\)</span> non-stationary process.
+\end{frame}</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-to-deal-with-a-non-stationary-process.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/Flaviapaoloni/Intro-to-Time-Series/blob/main/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
