@@ -86,11 +86,12 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="time-series-processes.html"><a href="time-series-processes.html"><i class="fa fa-check"></i><b>2</b> Time Series Processes</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="time-series-processes.html"><a href="time-series-processes.html#moving-average"><i class="fa fa-check"></i><b>2.1</b> Moving Average</a></li>
-<li class="chapter" data-level="2.2" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-process"><i class="fa fa-check"></i><b>2.2</b> Autoregressive process</a></li>
-<li class="chapter" data-level="2.3" data-path="time-series-processes.html"><a href="time-series-processes.html#wold-representation-theorem"><i class="fa fa-check"></i><b>2.3</b> Wold Representation Theorem</a></li>
-<li class="chapter" data-level="2.4" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-moving-average-process"><i class="fa fa-check"></i><b>2.4</b> Autoregressive Moving Average Process</a></li>
-<li class="chapter" data-level="2.5" data-path="time-series-processes.html"><a href="time-series-processes.html#random-walk"><i class="fa fa-check"></i><b>2.5</b> Random Walk</a></li>
+<li class="chapter" data-level="2.1" data-path="time-series-processes.html"><a href="time-series-processes.html#white-noise"><i class="fa fa-check"></i><b>2.1</b> White Noise</a></li>
+<li class="chapter" data-level="2.2" data-path="time-series-processes.html"><a href="time-series-processes.html#moving-average"><i class="fa fa-check"></i><b>2.2</b> Moving Average</a></li>
+<li class="chapter" data-level="2.3" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-process"><i class="fa fa-check"></i><b>2.3</b> Autoregressive process</a></li>
+<li class="chapter" data-level="2.4" data-path="time-series-processes.html"><a href="time-series-processes.html#wold-representation-theorem"><i class="fa fa-check"></i><b>2.4</b> Wold Representation Theorem</a></li>
+<li class="chapter" data-level="2.5" data-path="time-series-processes.html"><a href="time-series-processes.html#autoregressive-moving-average-process"><i class="fa fa-check"></i><b>2.5</b> Autoregressive Moving Average Process</a></li>
+<li class="chapter" data-level="2.6" data-path="time-series-processes.html"><a href="time-series-processes.html#random-walk"><i class="fa fa-check"></i><b>2.6</b> Random Walk</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="how-to-deal-with-a-non-stationary-process.html"><a href="how-to-deal-with-a-non-stationary-process.html"><i class="fa fa-check"></i><b>3</b> How to deal with a non-stationary process?</a>
 <ul>
@@ -130,22 +131,26 @@
 <div id="impulse-response-function" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Impulse Response Function<a href="analysis-of-economic-variables.html#impulse-response-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The Impulse Response Function, <span class="math inline">\(\widetilde{y}_{t}\)</span>, describes the expected response of a variable to an exogenous shock, which occurs at time <span class="math inline">\(t=s\)</span>. The shock could be of magnitude 1 or one standard deviation.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:irfshock"></span>
+<img src="irfshock.png" alt="Impulse/shock: Fed Funds interest rate, Response: GDP" width="489" />
+<p class="caption">
+Figure 4.1: Impulse/shock: Fed Funds interest rate, Response: GDP
+</p>
+</div>
 <p>A 1% shock in the interest rate/monetary policy decreases GDP for the first 6 months. After 6 months, GDP starts increasing again.</p>
 <p>The value of the variable before the shock happens is a fixed value <span class="math inline">\(y\)</span>.</p>
 <p>The IRFs are given by the following set of equations:
-<span class="math display">\[\begin{align}
-    \widetilde{y}_t&amp;=y \;\;\;\;\; \forall t&lt;s\\
-    \widetilde{y}_t&amp;=y+\frac{\partial y_t}{\partial \epsilon_s}\cdot 1 \;\;\;\;\; \forall t\geq s\\\label{eq:partirf}
+<span class="math display" id="eq:partirf">\[\begin{align}
+    \widetilde{y}_t&amp;=y \;\;\;\;\; \forall t&lt;s \\
+    \widetilde{y}_t&amp;=y+\frac{\partial y_t}{\partial \epsilon_s}\cdot 1 \;\;\;\;\; \forall t\geq s  \tag{4.1}
 \end{align}\]</span></p>
-<p><a href="#eq:partirf">(<strong>??</strong>)</a>.</p>
-<p>: the response of the time series <span class="math inline">\(y\)</span> to this exogenous shock. \
-Assume the time series is modelled as an AR(1)
+<p><strong>Focus</strong> the response of the time series <span class="math inline">\(y\)</span> to this exogenous shock.</p>
+<p>Assume the time series is modelled as an AR(1)
 <span class="math display">\[\begin{align*}
     y_t&amp;=\phi y_{t-1}+\epsilon_t
 \end{align*}\]</span>
 At time <span class="math inline">\(t\)</span> there is a shock of magnitude 1.</p>
-<p>We estimate the expected behaviour of <span class="math inline">\(y\)</span> in the next three periods using the Impulse Response Function.
-</p>
+<p>We estimate the expected behaviour of <span class="math inline">\(y\)</span> in the next three periods using the Impulse Response Function.</p>
 <p>At time <span class="math inline">\(t+1\)</span>, the next period, the AR(1) is given by:
 <span class="math display">\[\begin{align}
     y_{t+1}&amp;=\phi_1 y_{t}+\epsilon_{t+1}
@@ -162,10 +167,10 @@ So, the response of <span class="math inline">\(y_t\)</span> one period after th
 <span class="math display">\[\begin{align}
     \widetilde{y}_{t+1}&amp;=y+\frac{\partial y_{t+1}}{\partial \epsilon_t}\cdot 1= y+\phi \cdot 1
 \end{align}\]</span></p>
-<p>Repeat the process for two and three periods after the shock.\
+<p>Repeat the process for two and three periods after the shock.<br />
 After two periods, <span class="math inline">\(t+2\)</span>,
 <span class="math display">\[\begin{align}
-    y_{t+2}&amp;=\phi^3 y_{t-1}+\phi^2\epsilon_t+\phi\epsilon_{t+1} +\epsilon_{t+2}\\
+    y_{t+2}&amp;=\phi^3 y_{t-1}+\phi^2\epsilon_t+\phi\epsilon_{t+1} +\epsilon_{t+2}  
     \frac{\partial y_{t+2}}{\partial\epsilon_t}&amp;=\phi^2
 \end{align}\]</span>
 Then, the IRF after two periods is
@@ -177,34 +182,34 @@ Similarly for the IRF after three steps ahead: <span class="math inline">\(\wide
 <span class="math display">\[\begin{align}
     y_t&amp;=\phi y_{t-1}+\epsilon_t \rightarrow y_t=\sum_{j=0}^{\infty}\psi_j\epsilon_{t-j}
 \end{align}\]</span>
-where we use the substitution <span class="math inline">\(\psi_j=\phi^j\)</span>.\
+where we use the substitution <span class="math inline">\(\psi_j=\phi^j\)</span>.<br />
 Then, we get:
 <span class="math display">\[\begin{align}
          \frac{\partial y_{t}}{\partial\epsilon_s}&amp;=\psi_{t-s}=\phi^{t-s}
     \end{align}\]</span>
 The IRFs at 1,2, and 3 steps ahead are given by:
 <span class="math display">\[\begin{align}
-    \tilde{y}_{t+1}&amp;=y+\frac{\partial y_{t+1}}{\partial\epsilon_s}\cdot 1= y+\psi_1=y+\phi\\
-    \tilde{y}_{t+2}&amp;=y+\frac{\partial y_{t+2}}{\partial\epsilon_s}\cdot 1= y+\psi_2=y+\phi^2\\
+    \tilde{y}_{t+1}&amp;=y+\frac{\partial y_{t+1}}{\partial\epsilon_s}\cdot 1= y+\psi_1=y+\phi  
+    \tilde{y}_{t+2}&amp;=y+\frac{\partial y_{t+2}}{\partial\epsilon_s}\cdot 1= y+\psi_2=y+\phi^2  
     \tilde{y}_{t+3}&amp;=y+\frac{\partial y_{t+3}}{\partial\epsilon_s}\cdot 1= y+\psi_3=y+\phi^3
-\end{align}\]</span>
-\end{frame}</p>
+\end{align}\]</span></p>
 Notice two aspects.
 <p> models compute IRFs, including multiple variables and addressing the misspecification issue.</p>
 </div>
 <div id="local-projections" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Local Projections<a href="analysis-of-economic-variables.html#local-projections" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The Local Projection (LP) methods are useful to compute IRFs addressing possible misspecification in the model and considering multiple variables. </p>
+<p>The Local Projection (LP) methods are useful to compute IRFs addressing possible misspecification in the model and considering multiple variables.</p>
 This method estimates a regression for each variable and for each step ahead <span class="math inline">\(s\)</span>.
 <p>The LP specification for <span class="math inline">\(y_t\)</span> at step ahead <span class="math inline">\(s\)</span> is:
-<span class="math display">\[\begin{align}\label{lp}
+<span class="math display" id="eq:lp">\[\begin{align}
     y_{t+s}&amp;=\beta_s x_t+\sum_{j=1}^l \gamma_{s,l}^{\prime}y_{t-l}+\sum_{j=1}^l\delta_{s,l}^{\prime}x_{t-l}+\epsilon_{t+s}
+    \tag{4.2}
 \end{align}\]</span>
 <span class="math inline">\(y_{t+s}\)</span> includes both the lags of <span class="math inline">\(y_t\)</span> and of <span class="math inline">\(x_t\)</span> (second and term terms on the RHS).</p>
-<p>Let <span class="math inline">\(y_t\)</span> be real GDP of country <span class="math inline">\(C\)</span> and <span class="math inline">\(x_t\)</span> real interest rate. \
-Assume the interest rate increases suddenly. \
-Our goal is to estimate the effect of this increase on GDP in the next quarters/years.\
-At time <span class="math inline">\(t+1\)</span>, estimate the regression in eq. <span class="math inline">\(\eqref{lp}\)</span> with 1 lag using OLS:
+<p>Let <span class="math inline">\(y_t\)</span> be real GDP of country <span class="math inline">\(C\)</span> and <span class="math inline">\(x_t\)</span> real interest rate.<br />
+Assume the interest rate increases suddenly.<br />
+Our goal is to estimate the effect of this increase on GDP in the next quarters/years.<br />
+At time <span class="math inline">\(t+1\)</span>, estimate the regression in eq. <a href="analysis-of-economic-variables.html#eq:lp">(4.2)</a> with 1 lag using OLS:
 <span class="math display">\[\begin{align}
     y_{t+1}&amp;=\beta_1 x_t+ \gamma_{1,1}y_{t-1}+\delta_{1,1}x_{t-1}+\epsilon_{t+1}
 \end{align}\]</span>
@@ -213,14 +218,14 @@ Repeat for estimating the effect at time <span class="math inline">\(t+2\)</span
     y_{t+2}&amp;=\beta_2 x_t+ \gamma_{2,1}y_{t-1}+\delta_{2,1}x_{t-1}+\epsilon_{t+1}
 \end{align}\]</span>
 And so on. In the end, the coefficients <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span> estimate the effect of an increase today in interest rate on GDP over the future periods.</p>
-<p>: the estimated <span class="math inline">\(\beta_s\)</span>. \
+<p><strong>Focus</strong> the estimated <span class="math inline">\(\beta_s\)</span>.<br />
 <span class="math inline">\(\beta_s\)</span> represents the impact of the shock on the variable <span class="math inline">\(y_t\)</span> - so it is the Local Projection impulse response.</p>
-<p>Estimate the equations for both time series and for each step ahead <span class="math inline">\(s=1,2,3,\ldots\)</span> using OLS. </p>
+<p>Estimate the equations for both time series and for each step ahead <span class="math inline">\(s=1,2,3,\ldots\)</span> using OLS.</p>
 <p>For each horizon <span class="math inline">\(s\)</span>, the LP impulse response, <span class="math inline">\(\beta_s\)</span>, is given by the difference between the expected value of <span class="math inline">\(y_{t+s}\)</span> if the shock has occurred and if it has not:
 <span class="math display">\[\begin{equation}
-    \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbbE(y_{t+s} |x_t =0,y_t,x_t)
+    \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbb{E}(y_{t+s} |x_t =0,y_t,x_t)
 \end{equation}\]</span>
-: when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors.</p>
+<strong>Note</strong> when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors.</p>
 
 </div>
 </div>
