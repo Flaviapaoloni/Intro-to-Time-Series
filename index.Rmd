@@ -449,8 +449,6 @@ The IRFs at 1,2, and 3 steps ahead are given by:
    \textcolor{blue}{\hyperlink{LP}{Local projections}} models compute IRFs, including multiple variables and addressing the misspecification issue. 
 
 
-
-
 ## Local Projections
 The Local Projection (LP) methods are useful to compute IRFs addressing possible misspecification in the model and considering multiple variables.  
 
@@ -490,6 +488,7 @@ For each horizon $s$, the LP impulse response, $\beta_s$, is given by the differ
     \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbb{E}(y_{t+s} |x_t =0,y_t,x_t)
 \end{equation}
 **Note** when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors. 
+
 
 
 
