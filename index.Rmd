@@ -3,6 +3,7 @@ title: "Introduction to Time Series"
 author: "Flavia Paoloni"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+split_by: none
 ---
 
 
