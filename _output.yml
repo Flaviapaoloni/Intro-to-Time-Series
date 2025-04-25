@@ -1,5 +1,6 @@
 bookdown::gitbook:
   css: style.css
+  split_by: none
   config:
     toc:
       before: |
