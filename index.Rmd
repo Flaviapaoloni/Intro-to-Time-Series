@@ -17,7 +17,7 @@ split_by: none
 ## Types of data
 
  **Cross section**: data on different entities (workers, consumers, firms, etc.)
-collected at a single time period (e.g. number of inhabitants per postcode in 2010) .
+collected at a single time period (e.g. number of inhabitants per postcode in 2010).
 
 
 ```{r cross, fig.cap="Cross section: time variable year 2010, ID variable postcode", echo=FALSE,fig.align = 'center'}
