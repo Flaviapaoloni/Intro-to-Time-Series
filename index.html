@@ -1,459 +1,492 @@
----
+
+--- 
 title: "Introduction to Time Series"
 author: "Flavia Paoloni"
 date: "`r Sys.Date()`"
-output:
-  bookdown::html_document2:
-    toc: true
-    toc_float: true
-    number_sections: true
-    theme: flatly
 site: bookdown::bookdown_site
+split_by: none
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.align = "center")
-```
 
----
 
 # Introduction
 
-> *"Econometrics is the science and art of using economic theory and statistical techniques to analyze economic data."*
-> — Stock & Watson (2018)
 
-Econometrics helps us make sense of real-world data. This guide focuses on one of its most important tools: **time series analysis** — the study of data collected over time.
+"Econometrics is the science and art of using economic theory and statistical techniques to analyze economic data.''
+(Stock, J.H., Watson, M.W., 2018)
 
----
+## Types of data
 
-## Types of Data
+ **Cross section**: data on different entities (workers, consumers, firms, etc.)
+collected at a single time period (e.g. number of inhabitants per postcode in 2010).
 
-Before diving into time series, it helps to understand the three main types of data used in economics and statistics.
 
-**Cross-sectional data** captures information about many different subjects — people, firms, countries — all at a *single point in time*. For example, the number of inhabitants per postcode in 2010.
-
-```{r cross, fig.cap="Cross-sectional data: one point in time, many subjects (e.g. postcodes in 2010)."}
+```{r cross, fig.cap="Cross section: time variable year 2010, ID variable postcode", echo=FALSE,fig.align = 'center'}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cross.png")
 ```
 
-**Time series data** tracks a *single subject* over many time periods. For example, GDP in the Netherlands measured quarterly over several decades.
 
-```{r gdp, fig.cap="Time series data: one subject (the Netherlands) tracked over time. Source: FRED Real GDP Netherlands."}
+
+**Times series**: data for a single entity (person, firm, country, etc.) collected at
+multiple time periods (e.g. GDP in the Netherlands).
+```{r gdp, fig.cap="Time series: time variable date, ID variable Netherlands \\ Source: FRED Real GDP Netherlands", echo=FALSE,fig.align = 'center'}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/gdp.png")
 ```
 
-**Panel data** combines both dimensions: it follows *multiple subjects* across *multiple time periods*. For example, population counts across postcodes over several years.
 
-```{r kwb, fig.cap="Panel data: multiple subjects (postcodes) tracked over time."}
+
+**Panel data**: data for multiple entities in which each entry is observed at
+two or more time periods (e.g. number of inhabitants in postcodes over time).
+
+```{r kwb, fig.cap="Panel data: time variable  year, ID variable  postcode", echo=FALSE,fig.align = 'center'}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/kwb.png")
 ```
 
-```{r co2, fig.cap="A real-world example of a time series: historical CO₂ emissions over time."}
+
+```{r co2, fig.cap="Example of a time series - CO_2 emissions", echo=FALSE,fig.align = 'center'}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cw-historical-ghg-emissions.png")
 ```
 
----
+## Time Series
 
-## What Is a Time Series?
+A time series or a time-varying process is a set of observations $\{y_t\}$ on a variable over a time period.\footnote{\tiny{Mankiw, N.G., and Taylor, M. P., 2020. "Economics". Cengage Learning EMEA.}}  
 
-A **time series** is a sequence of observations recorded at successive points in time. We write this as:
+\begin{align}
+    y_1,\ldots,& y_n \implies \{y_t\} \;\;\;\;\;\ t=1,\ldots,n
+\end{align}
+The \textcolor{blue}{current value} is the value of $y$ at time $t$, \textcolor{blue}{$y_t$}.   
+The \textcolor{blue}{first lag} (or lagged value) is the value of $y_t$ in the previous period, \textcolor{blue}{$y_{t-1}$}.   
+The \textcolor{blue}{$p$-th lag} of $y$ is its value $p$ periods before $t$, \textcolor{blue}{$y_{t-p}$}.    
+The difference between the value of $y$ at time $t$ and $t-1$ is called \textcolor{blue}{first difference}
+\begin{align}
+    \Delta y_t&= y_t-y_{t-1}
+\end{align}
+where $\Delta$ is the difference operator.
 
-$$y_1, y_2, \ldots, y_n \quad \Longrightarrow \quad \{y_t\}, \quad t = 1, \ldots, n$$
+### Time Series properties
 
-Here are a few key terms you will encounter throughout this guide:
+Stationary data: time-series data that has a constant mean value over time.
 
-| Term | Meaning |
-|---|---|
-| **Current value** | The value of $y$ at time $t$: written $y_t$ |
-| **First lag** | The value from the previous period: $y_{t-1}$ |
-| **$p$-th lag** | The value from $p$ periods ago: $y_{t-p}$ |
-| **First difference** | The change from one period to the next: $\Delta y_t = y_t - y_{t-1}$ |
+This condition is very helpful for predicting and forecasting the time series, hence it is a relevant condition.   
 
-The symbol $\Delta$ is the **difference operator** — it simply means "the change in."
+In details, the stationarity condition implies that the mean, variance and covariance of the time series $y_t$ should be constant over time and finite:
+\begin{align}
+    \mathbb{E}(y_t)&=\mu \;\;\;\;\;\;\;\; \forall t  
+    \text{$\mathbb{V}$ar}(y_t)&=\gamma(0) \;\;\;\; \forall t  
+    \text{$\mathbb{C}$ov}(y_{t+h},y_t)&=\gamma(h)\;\;\;\; \forall t
+\end{align}
 
----
 
-## Stationarity
+\item Expected value: the mean of the series $y_t$ is the long-run average.  
+\item Variance: the dispersion or spread of a probability distribution. It is the expected value of the square of the deviation of the variable from its expected value. 
+\item Autocovariance: the covariance between two values of the time series at different points in time. 
 
-A time series is called **stationary** if its statistical behaviour does not change over time. Think of it like a river that always flows at roughly the same speed and depth — predictable and stable.
 
-Formally, stationarity requires three things to hold for all time periods $t$:
+# Time Series Processes
 
-$$\mathbb{E}(y_t) = \mu \qquad \text{(constant mean)}$$
-$$\text{Var}(y_t) = \gamma(0) \qquad \text{(constant variance)}$$
-$$\text{Cov}(y_{t+h}, y_t) = \gamma(h) \qquad \text{(covariance depends only on the gap } h \text{, not on } t \text{)}$$
+The time series models we discuss are:
 
-**Why does this matter?** Stationarity makes a time series much easier to model and forecast. If the mean or variance keeps changing, predictions become unreliable.
-
-The three properties above can be understood as follows:
-
-- **Mean ($\mu$):** The long-run average of the series — where it tends to hover over time.
-- **Variance ($\gamma(0)$):** How widely the values spread around that average.
-- **Autocovariance ($\gamma(h)$):** How strongly the value at time $t$ is related to the value $h$ periods later. This depends only on the *gap* $h$, not on when you are in the series.
-
----
-
-# Time Series Models
-
-We now introduce five fundamental time series models, building from the simplest to the most flexible:
-
-1. White Noise (WN)
-2. Moving Average (MA)
-3. Autoregressive (AR)
-4. Random Walk (RW)
-5. Autoregressive Moving Average (ARMA)
-
----
-
+\item White noise (WN)
+    \item Moving Average (MA)
+        \item Autoregressive (AR)
+        \item Random Walk (RW)
+        \item Autoregressive Moving Average (ARMA)
+        
 ## White Noise
 
-**White noise** is the simplest possible time series. It is a sequence of purely random values with no pattern or memory.
+White noise (WN) process: $\epsilon_t$ is a time series with the following characteristics
+\begin{align}
+    \mathbb{E}(\epsilon_t)&=0  
+    \text{$\mathbb{V}$ar}(\epsilon_t)&=\mathbb{E}(\epsilon_t^2)=\sigma^2 < \infty  
+    \text{$\mathbb{C}$ov}(\epsilon_t, \epsilon_{t-k})&=\gamma(k) =0 \;\;\;\;\;\;\;\; \text{for k}>0
+\end{align}
 
-Formally, a white noise process $\epsilon_t$ satisfies:
+The autocovariance $\gamma(k)$ of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: $\epsilon_t$ is not similar or influenced by $\epsilon_{t-k}$.
 
-$$\mathbb{E}(\epsilon_t) = 0 \qquad \text{(zero mean)}$$
-$$\text{Var}(\epsilon_t) = \sigma^2 < \infty \qquad \text{(constant variance)}$$
-$$\text{Cov}(\epsilon_t, \epsilon_{t-k}) = 0 \quad \text{for all } k > 0 \qquad \text{(no memory)}$$
-
-The key feature is the **zero autocovariance**: knowing the value today tells you nothing about the value tomorrow. There is no persistence — each observation is independent of all the others.
-
-```{r wn, fig.cap="A simulated white noise series: purely random, with no trend or pattern.", out.width="100%"}
+```{r wn, fig.cap="White noise - Example", echo=FALSE,fig.align = 'center', out.width="150%"}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/wn.png")
 ```
 
-> White noise is important because it appears as the "error term" in almost every time series model.
+## Moving Average
+Moving Average (MA) process: the time series $y_t$ depends on the current and the past values of the error term $\epsilon_t$.
 
----
+Consider that $y_t$ depends on the first lag of $\epsilon_t$, $\epsilon_{t-1}$.   
+Then, the time series follows a moving average process of order 1, denoted MA(1):
+\begin{equation*}
+    y_t=\mu+\epsilon_t+\theta \epsilon_{t-1}, \;\;\;\;\;\; \epsilon_t\sim \mathcal{N}(0,\sigma^2)
+\end{equation*}
+where $\mu$ is an constant, $\sigma^2$ is the variance of $\epsilon_t$. 
 
-## Moving Average (MA)
+Consider that $y_t$ depends on the $q$ lags of $\epsilon_t$. Then, the moving average process is of order $q$, MA(q).
+\begin{equation*}
+    y_t=\mu+\epsilon_t+\theta \epsilon_{t-1}+\ldots+\theta_q \epsilon_{t-q} 
+\end{equation*}
+ 
+ \textcolor{blue}{\cmark} Stationarity condition holds.
+\begin{itemize}
+\item**Mean**   $$\mathbb{E}(y_t)=\mathbb{E}(\mu+\epsilon_t+\theta \epsilon_{t-1})=\mu+\mathbb{E}(\epsilon_{t})+\theta\mathbb{E}(\epsilon_{t-1})$$  
+Then, since $\mathbb{E}(\epsilon_{t})=0$ for all $t$: $$\mathbb{E}(y_t)=\mu$$
+\item **Variance**
+   $$\text{$\mathbb{V}$ar}(y_t)=\gamma(0)=\mathbb{V}ar(\mu+\epsilon_t+\theta y_{t-1})$$ $$=\mathbb{V}ar( \epsilon_{t})+ \mathbb{V}ar(\theta \epsilon_{t-1})$$
+Note that $\mathbb{V}$ar($\epsilon_t$) = $\sigma^2$ for all periods $t$:
+$$\text{$\mathbb{V}$ar}(y_t)=\sigma^2(1+\theta^2)$$
+    \end{itemize}
+ 
+\begin{itemize}
+\item **Autocovariance** the covariance between two values of the time series at different points in time.    
+\vspace{0.5cm}
+The autocovariance between $y_t$ and $y_{t-1}$ is of order 1.    The autocovariance between $y_t$ and $y_{t-k}$ is of order $k$.   
+\vspace{0.5cm}
+Autocovariance of order 1, $\gamma(1)$:
 
-A **Moving Average** process links the current value of a series to current and *past error terms*. Instead of the series remembering its own past values, it remembers past shocks.
+$$\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)$$ 
 
-### MA(1) — Order 1
+Substitute $y_t$: 
 
-If $y_t$ depends only on the current and one past error:
+$$\gamma(1) = \text{$\mathbb{C}$ov}(\mu+\epsilon_t+\theta \epsilon_{t-1}, y_{t-1})$$
 
-$$y_t = \mu + \epsilon_t + \theta \epsilon_{t-1}, \qquad \epsilon_t \sim \mathcal{N}(0, \sigma^2)$$
+    \end{itemize} 
+    
+$$\gamma(1) = \text{$\mathbb{C}$ov}(\mu+\epsilon_t+\theta \epsilon_{t-1}, y_{t-1})$$
 
-### MA(q) — General Order
+Note: $y_{t-1} = \mu + \epsilon_{t-1}+ \theta \epsilon_{t-2}$.    Assume that the error terms are serially independent, i.e.~$\epsilon_t \perp \epsilon_{t-k} \;\; \forall k\geq1$.
 
-If $y_t$ depends on the $q$ most recent errors:
 
-$$y_t = \mu + \epsilon_t + \theta_1 \epsilon_{t-1} + \cdots + \theta_q \epsilon_{t-q}$$
+\begin{align*}
+\text{$\mathbb{C}$ov}(\mu&+\epsilon_t+\theta \epsilon_{t-1}, y_{t-1}) =  
+\text{$\mathbb{C}$ov}(\mu, y_{t-1})+&\text{$\mathbb{C}$ov}(\epsilon, y_{t-1})+ \text{$\mathbb{C}$ov}(\theta\epsilon_{t-1}, y_{t-1})
+\end{align*}
 
-### Is MA Stationary? ✅ Yes
 
-We can verify this by working out the mean, variance, and autocovariance of the MA(1) process.
+\begin{itemize}
+\item $\text{$\mathbb{C}$ov}(\mu, y_{t-1}) = 0$ since $\mu$ constant,
+ \item $\text{$\mathbb{C}$ov}(\epsilon_t, y_{t-1})=0$ since $\epsilon_t \perp \epsilon_{t-k} \;\; \forall k\geq1$
+%the covariance between $ \epsilon_t$ and $y_{t-1}$ is zero, since the error terms are serially independent - the error term at time $t$ is independent on the error term at time $t-1$ or $t-2$ exc.
+\end{itemize}
+$$\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\theta\text{$\mathbb{V}$ar}(\epsilon_{t-1})= \theta \sigma^2$$
+$$\text{$\mathbb{C}$ov}(y_t, y_{t-k})=\gamma(k)=0 \;\;\;\; \text{for} \;\;  k>1$$
 
-**Mean:**
-
-$$\mathbb{E}(y_t) = \mathbb{E}(\mu + \epsilon_t + \theta \epsilon_{t-1}) = \mu + 0 + 0 = \mu$$
-
-The mean is constant — ✓
-
-**Variance:**
-
-$$\text{Var}(y_t) = \text{Var}(\epsilon_t) + \text{Var}(\theta \epsilon_{t-1}) = \sigma^2 + \theta^2 \sigma^2 = \sigma^2(1 + \theta^2)$$
-
-The variance is constant — ✓
-
-**Autocovariance:**
-
-For a lag of 1, using the fact that $y_{t-1} = \mu + \epsilon_{t-1} + \theta \epsilon_{t-2}$ and that error terms are independent across time:
-
-$$\text{Cov}(y_t, y_{t-1}) = \gamma(1) = \theta \sigma^2$$
-
-For any lag greater than 1:
-
-$$\text{Cov}(y_t, y_{t-k}) = \gamma(k) = 0 \quad \text{for } k > 1$$
-
-This last result is intuitive: an MA(1) process has a "memory" of only one period. Beyond that, there is no relationship.
-
-```{r ma, fig.cap="A simulated MA(1) series with coefficient θ = 0.7.", out.width="100%"}
+```{r ma, fig.cap=" The coefficient $\\theta$ is set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ma.png")
 ```
 
----
 
-## Autoregressive Process (AR)
+## Autoregressive process
 
-An **Autoregressive** process links the current value of a series to its own *past values*. It is called "autoregressive" because the series regresses on itself.
+Autoregressive (AR) process: the time series $y_t$ depends on its previous values and on an error term $\epsilon_t$. 
 
-### AR(1) — Order 1
+Consider that $y_t$ depends only on its first lag and on $\epsilon_t$. Then, the time series follows an autoregressive process of order 1, denoted AR(1):
+\begin{equation*}
+    y_t=\mu+\phi y_{t-1}+\epsilon_t, \;\;\;\;\;\; \epsilon_t\sim \mathcal{N}(0,\sigma^2)
+\end{equation*}
+where $\mu$ is an intercept, $\sigma^2$ is the variance of $\epsilon_t$.  
+ 
 
-$$y_t = \mu + \phi y_{t-1} + \epsilon_t, \qquad \epsilon_t \sim \mathcal{N}(0, \sigma^2)$$
+Consider that $y_t$ depends on its $p$ past values. Then, the autoregressive process is of order $p$, AR(p).
 
-### AR(p) — General Order
+$$y_t=\mu+\phi y_{t-1}+\ldots+\phi_p y_{t-p}+\epsilon_t$$
+ 
 
-$$y_t = \mu + \phi_1 y_{t-1} + \cdots + \phi_p y_{t-p} + \epsilon_t$$
+\textcolor{blue}{\cmark} The stationarity condition holds **if** $|\phi|$ is lower than 1.
 
-### Is AR Stationary? ✅ Only if $|\phi| < 1$
+Let's consider an AR(1) process.  Its statistical properties are: 
 
-The stationarity condition is stricter here: it depends on the size of $\phi$.
+\begin{itemize}\item **Mean**   $$\mathbb{E}(y_t)=\mathbb{E}(\mu+\phi y_{t-1}+\epsilon_t)=\mu+\phi\mathbb{E}(y_{t-1})$$  
+    If the stationarity condition holds, the mean of $y_t$ is the same for all $t$ $\implies$ $\mathbb{E}(y_t)=\mathbb{E}(y_{t-1})$.    
+    
+    Then,
+    $$\mathbb{E}(y_t)=\frac{\mu}{1-\phi}$$
+    \end{itemize}
+    
 
-**Mean** (when $|\phi| < 1$):
+\begin{itemize}\item **Variance**   $$\mathbb{V}ar(y_t)=\gamma(0)=\mathbb{V}ar(\mu+\phi y_{t-1}+\epsilon_t)$$ $$\mathbb{V}ar(y_t)=\mathbb{V}ar(\phi y_{t-1})+ \mathbb{V}ar(\epsilon_t)$$   
+    If the stationarity condition holds, the variance of $y_t$ is the same for all $t$ $\implies$ $\text{$\mathbb{V}$ar}(y_t)=\text{$\mathbb{V}$ar}(y_{t-1})$.    
+    
+    Then,
+    
+    $$\text{$\mathbb{V}$ar}(y_t)=\frac{\sigma^2}{1-\phi^2}$$
+    \end{itemize}
 
-Since stationarity implies $\mathbb{E}(y_t) = \mathbb{E}(y_{t-1})$, we solve:
+\begin{itemize}\item **Autocovariance** the covariance between two values of the time series of order one is:   $$\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\text{$\mathbb{C}$ov}(\mu+\phi y_{t-1}+\epsilon_t, y_{t-1})$$
+$$=\phi\text{$\mathbb{V}$ar}(y_{t-1})= \phi \frac{\sigma^2}{1-\phi^2}$$
 
-$$\mathbb{E}(y_t) = \mu + \phi \mathbb{E}(y_t) \implies \mathbb{E}(y_t) = \frac{\mu}{1 - \phi}$$
+Notice that   $\text{$\mathbb{C}$ov}(\phi y_{t-1}, y_{t-1})=\phi \text{$\mathbb{C}$ov}(y_{t-1}, y_{t-1})=\phi\text{$\mathbb{V}$ar}(y_{t-1})$
 
-**Variance** (when $|\phi| < 1$):
+ \end{itemize}
 
-Similarly, since $\text{Var}(y_t) = \text{Var}(y_{t-1})$ under stationarity:
-
-$$\text{Var}(y_t) = \frac{\sigma^2}{1 - \phi^2}$$
-
-**Autocovariance of order 1:**
-
-$$\text{Cov}(y_t, y_{t-1}) = \gamma(1) = \phi \cdot \text{Var}(y_{t-1}) = \frac{\phi \sigma^2}{1 - \phi^2}$$
-
-Unlike the MA(1), the AR(1) process has memory that extends indefinitely — each past value contributes a little, decaying geometrically at rate $\phi$.
-
-```{r ar, fig.cap="A simulated AR(1) series with coefficient φ = 0.7.", out.width="100%"}
+```{r ar, fig.cap="The coefficient $\\phi$ is set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ar.png")
 ```
 
----
 
-## The Wold Representation Theorem
+## Wold Representation Theorem
+A (covariance) stationary time series $y_t$ can be represented as a Moving Average process of order infinity, MA($\infty$):
+\begin{align*}
+    y_t&=\sum_{j=0}^\infty\psi_j\epsilon_{t-j}
+\end{align*}
+To see how, consider an AR(1) process:
+\begin{align*}\label{ar1}
+    y_t&=\phi y_{t-1}+\epsilon_t
+\end{align*}
+Substitute $y_{t-1}$:
+\begin{align*}
+    y_t&=\phi^2 y_{t-2}+ \phi \epsilon_{t-1} +\epsilon_t
+\end{align*}
+Recursively substitute $y_{t-2}$ to $y_{t-j}$, until you get:
+\begin{align*}
+    y_t&=\phi^j \epsilon_{t-j}+ \ldots + \phi \epsilon_{t-1} +\epsilon_t= \sum_{j=0}^\infty \psi_j \epsilon_{t-j} 
+\end{align*}
+where $\psi_j =\phi^j$ and $\sum_{j=0}^\infty|\psi_j|<\infty$.
 
-An elegant result connects AR and MA processes: any stationary time series can be written as an MA process of infinite order — MA($\infty$).
+## Autoregressive Moving Average Process
+  Autoregressive Moving Average (ARMA) process: the time series $y_t$ is formed by an autoregressive component and a moving average one.
 
-$$y_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}$$
+The representation of ARMA(1,1) combines AR(1) and MA(1):
+    $$ y_t=\phi y_{t-1}+\epsilon_t+\theta \epsilon_{t-1}$$
 
-To see why, take an AR(1) and repeatedly substitute past values of $y$:
+The ARMA process of order (p,q) is:
 
-$$y_t = \phi y_{t-1} + \epsilon_t$$
-$$= \phi(\phi y_{t-2} + \epsilon_{t-1}) + \epsilon_t = \phi^2 y_{t-2} + \phi \epsilon_{t-1} + \epsilon_t$$
-$$= \cdots = \sum_{j=0}^{\infty} \phi^j \epsilon_{t-j}$$
+  $$y_t=\phi_1 y_{t-1}+\ldots+\phi_p y_{t-p}+\epsilon_t+\theta_1 \epsilon_{t-1}+\ldots+\theta_q \epsilon_{t-q}$$
 
-Here, $\psi_j = \phi^j$. As long as $|\phi| < 1$, these coefficients shrink toward zero, and the series converges.
+\textcolor{blue}{\ding{51}} The stationarity condition holds **if** $|\phi|$ is lower than 1.
 
-> **In plain terms:** an AR process stores its history through its own past values. The Wold theorem shows that this is equivalent to a weighted sum of all past shocks — just with an infinite number of terms.
+Notice that ARMA(1,0) is an AR(1) and ARMA(0,1) is an MA(1).
 
----
+\begin{itemize}
+    \item **Mean** $$\mathbb{E}(y_t)= 0$$ If there is an intercept $\mu$ in ARMA(1,1), the mean is $$\mathbb{E}(y_t)= \frac{\mu}{1-\phi}$$
+    \item **Variance**$$\text{$\mathbb{V}$ar}(y_t)=\gamma(0)=\text{$\mathbb{V}$ar}(\phi y_{t-1}+\epsilon_t+\theta \epsilon_{t-1})$$
+    $$=\text{$\mathbb{V}$ar}(\phi y_{t-1})+\text{$\mathbb{V}$ar}(\epsilon_t)+\text{$\mathbb{V}$ar}(\theta \epsilon_{t-1})+2\text{$\mathbb{C}$ov}(\phi y_{t-1},\theta \epsilon_{t-1} )$$
+    $$=\phi^2\gamma(0)+(1+\theta^2+2\phi\theta)\sigma^2 $$
+\end{itemize}
 
-## Autoregressive Moving Average (ARMA)
 
-**ARMA** combines both components: the series depends on its own past values *and* on past error terms.
-
-### ARMA(1,1)
-
-$$y_t = \phi y_{t-1} + \epsilon_t + \theta \epsilon_{t-1}$$
-
-### ARMA(p,q) — General
-
-$$y_t = \phi_1 y_{t-1} + \cdots + \phi_p y_{t-p} + \epsilon_t + \theta_1 \epsilon_{t-1} + \cdots + \theta_q \epsilon_{t-q}$$
-
-Note that ARMA(1,0) is just an AR(1), and ARMA(0,1) is just an MA(1) — these are special cases.
-
-### Is ARMA Stationary? ✅ Only if $|\phi| < 1$
-
-The stationarity condition depends on the AR part only.
-
-**Mean** (with intercept $\mu$):
-
-$$\mathbb{E}(y_t) = \frac{\mu}{1 - \phi}$$
-
-**Variance:**
-
-$$\text{Var}(y_t) = \phi^2 \gamma(0) + (1 + \theta^2 + 2\phi\theta)\sigma^2$$
-
-Solving for $\gamma(0)$ gives the full expression.
-
-```{r arma, fig.cap="A simulated ARMA(1,1) series with φ = θ = 0.7.", out.width="100%"}
+```{r arma, fig.cap="The coefficient $\\phi$ and $\\theta$ are both set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/arma.png")
 ```
 
----
-
 ## Random Walk
 
-What happens when $\phi = 1$ in an AR(1)? We get a **random walk**:
+If the parameter $\phi=1$, the process is a random walk (RW):
+\begin{align*}
+    y_t&=y_{t-1}+\epsilon_t
+\end{align*}
 
-$$y_t = y_{t-1} + \epsilon_t$$
+This time series is a sum of random shocks $\epsilon_t$ with $t$ from time 1 until $t$.
+\begin{itemize}
+    \item[1.] Note that $y_{t-1}=y_{t-2}+\epsilon_{t-1}$
+    \item[2.] Substitute $y_{t-1}$ into $y_t$
+    \begin{align*}
+        y_t&=y_{t-2}+\epsilon_{t-1}+\epsilon_t
+    \end{align*}
+\end{itemize}
+Repeat steps \textcolor{blue}{1.} and \textcolor{blue}{2.} for all $t$ until you get:
+$$y_t=\epsilon_1+\ldots+\epsilon_t$$
 
-By substituting repeatedly, we can show:
+\textcolor{red}{\ding{55}} The stationarity condition **doesn't hold.
 
-$$y_t = \epsilon_1 + \epsilon_2 + \cdots + \epsilon_t$$
+Note that $\epsilon_t \; \forall t$ is a white noise process, $\epsilon_t \sim \mathcal{N}(0, \sigma^2)$. 
 
-The series is simply the *accumulated sum* of all past shocks. Each new shock permanently shifts the level of the series — there is no tendency to return to a mean.
+\begin{itemize}
+    \item **Mean** $$\mathbb{E}(y_t)=\mathbb{E}(\epsilon_1+\ldots+\epsilon_t)=0$$ 
+    \item **Variance** $$\text{$\mathbb{V}$ar}(y_t)=\text{$\mathbb{V}$ar}(\epsilon_1)+\ldots+\text{$\mathbb{V}$ar}(\epsilon_t)=t\sigma^2$$
+\end{itemize}
+The variance increases with $t$ $\implies$ the variance depends on time $\implies$ non-stationary process.
 
-### Is a Random Walk Stationary? ❌ No
+\begin{itemize}
+    \item **Covariance** $$\text{$\mathbb{C}$ov}(y_t, y_{t-h})= \text{$\mathbb{C}$ov}(y_{t-h}+\epsilon_{t-h+1}+\ldots+\epsilon_t, y_{t-h})$$
 
-**Mean:** $\mathbb{E}(y_t) = 0$ — constant, ✓
+Note that the random shocks are uncorrelated to each other: $\text{$\mathbb{C}$ov}(\epsilon_{t-h+1}, y_{t-h})=0$ $\forall$$h$.
 
-**Variance:** $\text{Var}(y_t) = t \sigma^2$ — *grows with time*, ✗
+$$\text{$\mathbb{C}$ov}(y_t, y_{t-h})=\text{$\mathbb{V}$ar}(y_{t-h})= (t-h)\sigma^2$$
+\end{itemize}   
 
-**Covariance:** $\text{Cov}(y_t, y_{t-h}) = (t-h)\sigma^2$ — *depends on $t$*, ✗
+The variance increases with $t$   $\implies$ the variance depends on time   $\implies$ non-stationary process.
 
-Because the variance increases without bound, the series wanders further and further from its starting point over time. This is non-stationary.
-
-```{r rw, fig.cap="A simulated random walk: the series drifts unpredictably with no tendency to revert.", out.width="100%"}
+```{r rw, fig.cap="Random Walk - Example", echo=FALSE,fig.align = 'center',out.width="150%"}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/rw.png")
 ```
 
----
+ 
 
-# Dealing with Non-Stationarity
+# How to deal with a non-stationary process? 
 
-The random walk is a classic example of a **non-stationary** process. Its non-stationarity is caused by the accumulation of shocks — this creates what is called a **stochastic trend**.
+The RW is a simple nonstationary process. ^[Non-stationary process: time-series data with mean value that can either rise or fall over time.]
+     
 
-The fix is simple: take the **first difference**.
+The accumulation of random shocks, $\epsilon_t$, creates a stochastic trend.
 
-$$\Delta y_t = y_t - y_{t-1} = \epsilon_t$$
+This causes the non-stationarity.
 
-The first difference of a random walk is white noise — which *is* stationary. By differencing once, we remove the trend and recover a well-behaved series.
+ 
 
----
+To solve this problem, a solution is to take the first difference: $\Delta y_t=y_t - y_{t-1}$.  
+The first difference of a random walk process would be the white noise:
+\begin{align*}
+    \Delta y_t&=y_t - y_{t-1}=\epsilon_t
+\end{align*}
 
-## How Do We Detect Non-Stationarity?
 
-Suppose we observe some data and want to know whether it comes from a stationary process or a random walk. We model it as:
+\begin{center}
+    How do we know if observed data are generated by a stationary process?
+\end{center} 
 
-$$y_t = \phi y_{t-1} + \epsilon_t$$
+Assume the data follow an AR(1) process: 
+\begin{align*}
+    y_t&=\phi y_{t-1}+\epsilon_t
+\end{align*}
+**Focus** the coefficient $\phi$. Is it equal to 1 (unit root) or smaller than 1? 
 
-The question becomes: is $\phi = 1$ (random walk / **unit root**) or is $|\phi| < 1$ (stationary)?
+We can use the Dickey-Fuller (DF) test to check for stationarity and answer this question. 
 
-We answer this using the **Dickey-Fuller (DF) test**.
+## Dickey-Fuller test 
 
----
+The Dickey-Fuller test tests the null hypothesis of $\phi$ being equal to 1, against the alternative hypothesis of $\phi$ being lower than 1. Using a compact notation, DF tests   \begin{center} $H_0: \phi = 1$ \textit{vs.} $H_a: |\phi| < 1$. \end{center}
 
-## The Dickey-Fuller Test
+ 
+The DF test is similar to the $t$-test\footnote{ The $t$-test is used also in hypothesis testing in Statistics.}
+\begin{align*}
+    DF&=\frac{\hat{\phi}-1}{SE(\hat{\phi})}
+\end{align*}
+where $\hat{\phi}$ is the parameter $\phi$ of AR(1) estimated using OLS.    
+The $t$-test follows a Student t-distribution, while the DF test follows a \textit{Dickey-Fuller distribution}.
 
-The Dickey-Fuller test is a formal hypothesis test for a unit root:
 
-$$H_0: \phi = 1 \quad \text{(non-stationary / unit root)}$$
-$$H_a: |\phi| < 1 \quad \text{(stationary)}$$
 
-The test statistic is computed similarly to a standard $t$-test:
 
-$$DF = \frac{\hat{\phi} - 1}{SE(\hat{\phi})}$$
 
-where $\hat{\phi}$ is the OLS estimate of $\phi$.
+# Analysis of Economic Variables
+   Exogenous shocks are unpredictable events affecting a system of variables. For example, a monetary policy shock affects a country's output and inflation. 
 
-> **Important:** Unlike the usual $t$-test, the DF statistic follows a special **Dickey-Fuller distribution**, not the standard Student-$t$ distribution. This means you need Dickey-Fuller critical values when interpreting results.
+   ARMA models are useful to analyse the response of economic variables to these shocks. 
+   
+   \textcolor{blue}{\hyperlink{irfs}{Impulse Response Functions (IRFs)}} estimate the expected response of these variables, modelled with ARMA processes, to a shock. 
 
-If the test statistic is sufficiently negative (below the critical value), we reject $H_0$ and conclude the series is stationary.
 
----
+## Impulse Response Function
+The Impulse Response Function, $\widetilde{y}_{t}$, describes the expected response of a variable to an exogenous shock, which occurs at time $t=s$. The shock could be of magnitude 1 or one standard deviation.
 
-# Analysing Economic Variables
-
-In economics, we are often interested in how an unexpected event — called an **exogenous shock** — affects variables like GDP, inflation, or employment over time.
-
-For example: if the central bank unexpectedly raises interest rates, how does GDP respond in the following months?
-
-ARMA models provide a framework for answering this. The tool we use is called the **Impulse Response Function (IRF)**.
-
----
-
-## Impulse Response Functions (IRFs)
-
-An **Impulse Response Function** describes the expected path of a variable over time, following a one-time shock.
-
-```{r irfshock, fig.cap="Example IRF: the response of GDP to a 1% shock in the Fed Funds interest rate."}
+```{r irfshock, fig.cap="Impulse/shock: Fed Funds interest rate, Response: GDP", echo=FALSE,fig.align = 'center'}
 knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/irfshock.png")
 ```
 
-In this example, a 1% rise in interest rates causes GDP to fall for about 6 months, after which it begins recovering.
 
-### How IRFs Are Calculated
+A 1% shock in the interest rate/monetary policy decreases GDP for the first 6 months. After 6 months, GDP starts increasing again. 
 
-Before the shock (at any time $t < s$), the variable sits at a baseline level $y$:
 
-$$\widetilde{y}_t = y \quad \text{for all } t < s$$
+The value of the variable before the shock happens is a fixed value $y$.
 
-After the shock at time $s$, the IRF tracks how $y$ departs from that baseline:
+The IRFs are given by the following set of equations:
+\begin{align}
+    \widetilde{y}_t&=y \;\;\;\;\; \forall t<s \\ 
+    \widetilde{y}_t&=y+\frac{\partial y_t}{\partial \epsilon_s}\cdot 1 \;\;\;\;\; \forall t\geq s  (\#eq:partirf)
+\end{align}
 
-$$\widetilde{y}_t = y + \frac{\partial y_t}{\partial \epsilon_s} \cdot 1 \quad \text{for all } t \geq s$$
+  **Focus** the response of the time series $y$ to this exogenous shock.   
+ 
+Assume the time series is modelled as an AR(1)
+\begin{align*}
+    y_t&=\phi y_{t-1}+\epsilon_t
+\end{align*}
+At time $t$ there is a shock of magnitude 1. 
 
-The derivative $\frac{\partial y_t}{\partial \epsilon_s}$ captures the sensitivity of $y$ to the shock — how much does the series change when hit by a unit shock at time $s$?
 
-### IRFs for an AR(1)
 
-Assume $y_t = \phi y_{t-1} + \epsilon_t$. A shock of size 1 hits at time $t$.
+We estimate the expected behaviour of $y$ in the next three periods using the Impulse Response Function. 
+ 
 
-One period later, $y_{t+1} = \phi y_t + \epsilon_{t+1}$. Substituting $y_t$:
+At time $t+1$, the next period, the AR(1) is given by:
+\begin{align}
+    y_{t+1}&=\phi_1 y_{t}+\epsilon_{t+1}
+\end{align}
+Substitute $y_t$:
+\begin{align}
+    y_{t+1}&=\phi (\phi y_{t-1}+\epsilon_t)+\epsilon_{t+1}=\phi^2 y_{t-1}+\phi\epsilon_t+\epsilon_{t+1}
+\end{align}
 
-$$y_{t+1} = \phi^2 y_{t-1} + \phi \epsilon_t + \epsilon_{t+1}$$
+Then, the effect of the shock on the time series is the partial derivative of $y_t$ with respect to $\epsilon_t$:
+\begin{align}
+    \frac{\partial y_{t+1}}{\partial\epsilon_t}&=\phi
+\end{align}
+So, the response of $y_t$ one period after the shock occurred is
+\begin{align}
+    \widetilde{y}_{t+1}&=y+\frac{\partial y_{t+1}}{\partial \epsilon_t}\cdot 1= y+\phi \cdot 1
+\end{align} 
 
-So the effect of the shock on $y_{t+1}$ is:
 
-$$\frac{\partial y_{t+1}}{\partial \epsilon_t} = \phi \implies \widetilde{y}_{t+1} = y + \phi$$
+Repeat the process for two and three periods after the shock.  
+After two periods, $t+2$, 
+\begin{align}
+    y_{t+2}&=\phi^3 y_{t-1}+\phi^2\epsilon_t+\phi\epsilon_{t+1} +\epsilon_{t+2}  
+    \frac{\partial y_{t+2}}{\partial\epsilon_t}&=\phi^2
+\end{align}
+Then, the IRF after two periods is
+\begin{align}
+    \widetilde{y}_{t+2}&=y+\phi^2 \cdot 1
+\end{align}
+Similarly for the IRF after three steps ahead: $\widetilde{y}_{t+3}=y+\phi^3 \cdot 1$.
 
-Continuing this logic using the Wold representation ($y_t = \sum_{j=0}^\infty \phi^j \epsilon_{t-j}$), we get a clean pattern:
+Alternatively, use the Wold representation theorem (see \hyperlink{wold}{\textcolor{blue}{Wold Th.}}):
+\begin{align}
+    y_t&=\phi y_{t-1}+\epsilon_t \rightarrow y_t=\sum_{j=0}^{\infty}\psi_j\epsilon_{t-j}
+\end{align}
+where we use the substitution $\psi_j=\phi^j$.  
+    Then, we get:
+    \begin{align}
+         \frac{\partial y_{t}}{\partial\epsilon_s}&=\psi_{t-s}=\phi^{t-s}
+    \end{align}
+The IRFs at 1,2, and 3 steps ahead are given by:
+\begin{align}
+    \tilde{y}_{t+1}&=y+\frac{\partial y_{t+1}}{\partial\epsilon_s}\cdot 1= y+\psi_1=y+\phi  
+    \tilde{y}_{t+2}&=y+\frac{\partial y_{t+2}}{\partial\epsilon_s}\cdot 1= y+\psi_2=y+\phi^2  
+    \tilde{y}_{t+3}&=y+\frac{\partial y_{t+3}}{\partial\epsilon_s}\cdot 1= y+\psi_3=y+\phi^3
+\end{align}
 
-| Period | IRF |
-|--------|-----|
-| $t+1$ | $y + \phi$ |
-| $t+2$ | $y + \phi^2$ |
-| $t+3$ | $y + \phi^3$ |
+   Notice two aspects. 
+   \begin{itemize}
+       \item[1.] Multiple variables can affect each other over time. The inflation rate is influenced by past values of inflation, and also by unemployment and interest rate, for instance. 
+   \item [2.] The process might be misspecified. 
+   \end{itemize}
+    
+   
+   \textcolor{blue}{\hyperlink{LP}{Local projections}} models compute IRFs, including multiple variables and addressing the misspecification issue. 
 
-The shock decays geometrically at rate $\phi$. If $|\phi| < 1$, its effect eventually disappears.
-
-### Limitations of ARMA-Based IRFs
-
-Two important caveats apply when computing IRFs from ARMA models:
-
-1. **Multiple variables interact.** Inflation is affected by its own past, but also by unemployment, interest rates, and other variables. A single-variable model may miss these interactions.
-
-2. **Misspecification risk.** The chosen model might not accurately represent the true data-generating process.
-
-These issues motivated the development of **Local Projections**.
-
----
 
 ## Local Projections
+The Local Projection (LP) methods are useful to compute IRFs addressing possible misspecification in the model and considering multiple variables.  
 
-**Local Projections (LP)** offer a flexible alternative for computing IRFs. Rather than assuming a specific model structure, they estimate a separate regression for each forecast horizon $s$.
+This method estimates a regression for each variable and for each step ahead $s$.
+\begin{itemize}
+    \item Consider two time series: $y_t$ and $x_t$
+\item Consider a shock occurring at time $t$ in $x_t$
+\end{itemize}
+The LP specification for $y_t$ at step ahead $s$ is:
+\begin{align}
+    y_{t+s}&=\beta_s x_t+\sum_{j=1}^l \gamma_{s,l}^{\prime}y_{t-l}+\sum_{j=1}^l\delta_{s,l}^{\prime}x_{t-l}+\epsilon_{t+s}
+    (\#eq:lp)
+\end{align}
+$y_{t+s}$ includes both the lags of $y_t$ and of $x_t$ (second and term terms on the RHS).
 
-### The Setup
+Let $y_t$ be real GDP of country $C$ and $x_t$ real interest rate.   
+Assume the interest rate increases suddenly.   
+Our goal is to estimate the effect of this increase on GDP in the next quarters/years.   
+At time $t+1$, estimate the regression in eq. \@ref(eq:lp) with 1 lag using OLS:
+\begin{align}
+    y_{t+1}&=\beta_1 x_t+ \gamma_{1,1}y_{t-1}+\delta_{1,1}x_{t-1}+\epsilon_{t+1}
+\end{align}
+Repeat for estimating the effect at time $t+2$:
+\begin{align}
+    y_{t+2}&=\beta_2 x_t+ \gamma_{2,1}y_{t-1}+\delta_{2,1}x_{t-1}+\epsilon_{t+1}
+\end{align}
+And so on. In the end, the coefficients $\beta_1$, $\beta_2$ estimate the effect of an increase today in interest rate on GDP over the future periods.
 
-Consider two time series: the variable of interest $y_t$ and a shock variable $x_t$.
 
-For each horizon $s = 1, 2, 3, \ldots$, estimate the regression:
+**Focus** the estimated $\beta_s$.   
+$\beta_s$ represents the impact of the shock on the variable $y_t$ - so it is the Local Projection impulse response. 
 
-$$y_{t+s} = \beta_s x_t + \sum_{l=1}^{L} \gamma_{s,l}' y_{t-l} + \sum_{l=1}^{L} \delta_{s,l}' x_{t-l} + \epsilon_{t+s}$$
+Estimate the equations for both time series and for each step ahead $s=1,2,3,\ldots$ using OLS.  
 
-The right-hand side includes:
-
-- $x_t$: the shock variable today
-- Lags of $y_t$: to control for the series' own history
-- Lags of $x_t$: to control for past shocks
-
-### Interpreting the Results
-
-The coefficient $\beta_s$ is the **LP impulse response at horizon $s$**: it represents the expected difference in $y_{t+s}$ between a world where the shock occurred ($x_t = 1$) and one where it did not ($x_t = 0$):
-
-$$\beta_s = \mathbb{E}(y_{t+s} \mid x_t = 1) - \mathbb{E}(y_{t+s} \mid x_t = 0)$$
-
-### A Practical Example
-
-Let $y_t$ be real GDP and $x_t$ be the real interest rate. Suppose interest rates rise unexpectedly. To trace the effect on GDP over 3 quarters:
-
-- **Horizon 1:** Estimate $y_{t+1} = \beta_1 x_t + \gamma_{1,1} y_{t-1} + \delta_{1,1} x_{t-1} + \epsilon_{t+1}$
-- **Horizon 2:** Estimate $y_{t+2} = \beta_2 x_t + \gamma_{2,1} y_{t-1} + \delta_{2,1} x_{t-1} + \epsilon_{t+2}$
-- And so on...
-
-The sequence $\beta_1, \beta_2, \beta_3, \ldots$ traces out the impulse response.
-
-> **Practical note:** When estimating LP regressions, always use **heteroskedasticity- and autocorrelation-consistent (HAC) standard errors**. This is important because the error terms across horizons may be correlated, and ordinary standard errors would be misleading.
-
----
-
-# Summary
-
-| Model | Depends on | Stationary? |
-|-------|-----------|-------------|
-| White Noise | Nothing (pure randomness) | ✅ Always |
-| MA(q) | Past $q$ error terms | ✅ Always |
-| AR(p) | Past $p$ own values | ✅ If $|\phi| < 1$ |
-| ARMA(p,q) | Both past values and errors | ✅ If $|\phi| < 1$ |
-| Random Walk | All past shocks (accumulated) | ❌ Never |
-
-When a series is non-stationary, differencing it often restores stationarity. The Dickey-Fuller test helps determine whether differencing is needed.
-
----
-
-*References: Stock, J.H. & Watson, M.W. (2018). Mankiw, N.G. & Taylor, M.P. (2020).*
+For each horizon $s$, the LP impulse response, $\beta_s$, is given by the difference between the expected value of $y_{t+s}$ if the shock has occurred and if it has not:
+\begin{equation}
+    \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbb{E}(y_{t+s} |x_t =0,y_t,x_t)
+\end{equation}
+**Note** when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors. 
