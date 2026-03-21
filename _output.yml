@@ -1,7 +1,8 @@
 bookdown::gitbook:
   css: style.css
-  split_by: none
+  
   config:
+    split_by: none
     toc:
       before: |
         <li><a href="./">Introduction to Time Series</a></li>
