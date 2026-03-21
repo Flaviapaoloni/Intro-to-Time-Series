@@ -2,14 +2,12 @@
 title: "Introduction to Time Series"
 author: "Flavia Paoloni"
 date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
 output:
-  bookdown::gitbook:
+  html_document:
+    df_print: paged
     split_by: none
-    config:
-      toc:
-        collapse: subsection
-  bookdown::pdf_document: default
+  pdf_document: default
+site: bookdown::bookdown_site
 ---
 
 
@@ -27,7 +25,7 @@ collected at a single time period (e.g. number of inhabitants per postcode in 20
 
 
 ```{r cross, fig.cap="Cross section: time variable year 2010, ID variable postcode", echo=FALSE,fig.align = 'center'}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cross.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/cross.png")
 ```
 
 
@@ -35,7 +33,7 @@ knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cro
 **Times series**: data for a single entity (person, firm, country, etc.) collected at
 multiple time periods (e.g. GDP in the Netherlands).
 ```{r gdp, fig.cap="Time series: time variable date, ID variable Netherlands \\ Source: FRED Real GDP Netherlands", echo=FALSE,fig.align = 'center'}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/gdp.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/gdp.png")
 ```
 
 
@@ -44,12 +42,12 @@ knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/gdp
 two or more time periods (e.g. number of inhabitants in postcodes over time).
 
 ```{r kwb, fig.cap="Panel data: time variable  year, ID variable  postcode", echo=FALSE,fig.align = 'center'}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/kwb.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/kwb.png")
 ```
 
 
 ```{r co2, fig.cap="Example of a time series - CO_2 emissions", echo=FALSE,fig.align = 'center'}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/cw-historical-ghg-emissions.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/cw-historical-ghg-emissions.png")
 ```
 
 ## Time Series
@@ -109,7 +107,7 @@ White noise (WN) process: $\epsilon_t$ is a time series with the following chara
 The autocovariance $\gamma(k)$ of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: $\epsilon_t$ is not similar or influenced by $\epsilon_{t-k}$.
 
 ```{r wn, fig.cap="White noise - Example", echo=FALSE,fig.align = 'center', out.width="150%"}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/wn.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/wn.png")
 ```
 
 ## Moving Average
@@ -172,7 +170,7 @@ $$\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\theta\text{$\mathbb{V}$ar}(\eps
 $$\text{$\mathbb{C}$ov}(y_t, y_{t-k})=\gamma(k)=0 \;\;\;\; \text{for} \;\;  k>1$$
 
 ```{r ma, fig.cap=" The coefficient $\\theta$ is set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ma.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/ma.png")
 ```
 
 
@@ -220,7 +218,7 @@ Notice that   $\text{$\mathbb{C}$ov}(\phi y_{t-1}, y_{t-1})=\phi \text{$\mathbb{
  \end{itemize}
 
 ```{r ar, fig.cap="The coefficient $\\phi$ is set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/ar.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/ar.png")
 ```
 
 
@@ -266,7 +264,7 @@ Notice that ARMA(1,0) is an AR(1) and ARMA(0,1) is an MA(1).
 
 
 ```{r arma, fig.cap="The coefficient $\\phi$ and $\\theta$ are both set to 0.7", echo=FALSE,fig.align = 'center', out.width="150%"}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/arma.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/arma.png")
 ```
 
 ## Random Walk
@@ -308,7 +306,7 @@ $$\text{$\mathbb{C}$ov}(y_t, y_{t-h})=\text{$\mathbb{V}$ar}(y_{t-h})= (t-h)\sigm
 The variance increases with $t$   $\implies$ the variance depends on time   $\implies$ non-stationary process.
 
 ```{r rw, fig.cap="Random Walk - Example", echo=FALSE,fig.align = 'center',out.width="150%"}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/rw.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/rw.png")
 ```
 
  
@@ -371,7 +369,7 @@ The $t$-test follows a Student t-distribution, while the DF test follows a \text
 The Impulse Response Function, $\widetilde{y}_{t}$, describes the expected response of a variable to an exogenous shock, which occurs at time $t=s$. The shock could be of magnitude 1 or one standard deviation.
 
 ```{r irfshock, fig.cap="Impulse/shock: Fed Funds interest rate, Response: GDP", echo=FALSE,fig.align = 'center'}
-knitr::include_graphics("/Users/flaviapaoloni/Downloads/Intro-to-Time-Series/irfshock.png")
+knitr::include_graphics("/Users/flaviapaoloni/Desktop/Intro-to-Time-Series/irfshock.png")
 ```
 
 
@@ -495,3 +493,7 @@ For each horizon $s$, the LP impulse response, $\beta_s$, is given by the differ
     \beta_s=\mathbb{E}(y_{t+s} |x_t=1,y_t,x_t) - \mathbb{E}(y_{t+s} |x_t =0,y_t,x_t)
 \end{equation}
 **Note** when estimating, include heteroskedasticity- and autocorrelation-consistent (HAC) standard errors. 
+
+
+
+
