@@ -2,12 +2,14 @@
 title: "Introduction to Time Series"
 author: "Flavia Paoloni"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    df_print: paged
-   
-  pdf_document: default
 site: bookdown::bookdown_site
+output:
+  bookdown::gitbook:
+    split_by: none
+    config:
+      toc:
+        collapse: subsection
+  bookdown::pdf_document: default
 ---
 
 
