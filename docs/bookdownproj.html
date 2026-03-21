@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to Time Series</title>
   <meta name="description" content="Introduction to Time Series" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to Time Series" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Flavia Paoloni" />
 
 
-<meta name="date" content="2025-04-26" />
+<meta name="date" content="2026-03-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -124,7 +124,7 @@
 <div id="header">
 <h1 class="title">Introduction to Time Series</h1>
 <p class="author"><em>Flavia Paoloni</em></p>
-<p class="date"><em>2025-04-26</em></p>
+<p class="date"><em>2026-03-19</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Introduction<a href="#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -135,7 +135,7 @@
 <p><strong>Cross section</strong>: data on different entities (workers, consumers, firms, etc.)
 collected at a single time period (e.g. number of inhabitants per postcode in 2010).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cross"></span>
-<img src="../../Downloads/Intro-to-Time-Series/cross.png" alt="Cross section: time variable year 2010, ID variable postcode" width="384" />
+<img src="cross.png" alt="Cross section: time variable year 2010, ID variable postcode" width="384" />
 <p class="caption">
 Figure 1.1: Cross section: time variable year 2010, ID variable postcode
 </p>
@@ -143,7 +143,7 @@ Figure 1.1: Cross section: time variable year 2010, ID variable postcode
 <strong>Times series</strong>: data for a single entity (person, firm, country, etc.) collected at
 multiple time periods (e.g. GDP in the Netherlands).
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gdp"></span>
-<img src="../../Downloads/Intro-to-Time-Series/gdp.png" alt="Time series: time variable date, ID variable Netherlands \ Source: FRED Real GDP Netherlands" width="771" />
+<img src="gdp.png" alt="Time series: time variable date, ID variable Netherlands \ Source: FRED Real GDP Netherlands" width="771" />
 <p class="caption">
 Figure 1.2: Time series: time variable date, ID variable Netherlands  Source: FRED Real GDP Netherlands
 </p>
@@ -151,13 +151,13 @@ Figure 1.2: Time series: time variable date, ID variable Netherlands  Source: F
 <p><strong>Panel data</strong>: data for multiple entities in which each entry is observed at
 two or more time periods (e.g. number of inhabitants in postcodes over time).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:kwb"></span>
-<img src="../../Downloads/Intro-to-Time-Series/kwb.png" alt="Panel data: time variable  year, ID variable  postcode" width="335" />
+<img src="kwb.png" alt="Panel data: time variable  year, ID variable  postcode" width="335" />
 <p class="caption">
 Figure 1.3: Panel data: time variable year, ID variable postcode
 </p>
 </div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:co2"></span>
-<img src="../../Downloads/Intro-to-Time-Series/cw-historical-ghg-emissions.png" alt="Example of a time series - CO_2 emissions" width="1470" />
+<img src="cw-historical-ghg-emissions.png" alt="Example of a time series - CO_2 emissions" width="1470" />
 <p class="caption">
 Figure 1.4: Example of a time series - CO_2 emissions
 </p>
@@ -212,7 +212,7 @@ Random Walk (RW)
 \end{align}\]</span></p>
 <p>The autocovariance <span class="math inline">\(\gamma(k)\)</span> of a white noise is 0. This indicates that the time series does not have memory of itself. So, there is no persistence in the white noise: <span class="math inline">\(\epsilon_t\)</span> is not similar or influenced by <span class="math inline">\(\epsilon_{t-k}\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:wn"></span>
-<img src="../../Downloads/Intro-to-Time-Series/wn.png" alt="White noise - Example" width="150%" />
+<img src="wn.png" alt="White noise - Example" width="150%" />
 <p class="caption">
 Figure 2.1: White noise - Example
 </p>
@@ -241,7 +241,7 @@ Stationarity condition holds.
 <p><span class="math display">\[\text{$\mathbb{C}$ov}(y_t, y_{t-1})=\gamma(1)=\theta\text{$\mathbb{V}$ar}(\epsilon_{t-1})= \theta \sigma^2\]</span>
 <span class="math display">\[\text{$\mathbb{C}$ov}(y_t, y_{t-k})=\gamma(k)=0 \;\;\;\; \text{for} \;\;  k&gt;1\]</span></p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ma"></span>
-<img src="../../Downloads/Intro-to-Time-Series/ma.png" alt=" The coefficient $\theta$ is set to 0.7" width="150%" />
+<img src="ma.png" alt=" The coefficient $\theta$ is set to 0.7" width="150%" />
 <p class="caption">
 Figure 2.2:  The coefficient <span class="math inline">\(\theta\)</span> is set to 0.7
 </p>
@@ -260,7 +260,7 @@ where <span class="math inline">\(\mu\)</span> is an intercept, <span class="mat
 <p> The stationarity condition holds <strong>if</strong> <span class="math inline">\(|\phi|\)</span> is lower than 1.</p>
 <p>Let’s consider an AR(1) process. Its statistical properties are:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ar"></span>
-<img src="../../Downloads/Intro-to-Time-Series/ar.png" alt="The coefficient $\phi$ is set to 0.7" width="150%" />
+<img src="ar.png" alt="The coefficient $\phi$ is set to 0.7" width="150%" />
 <p class="caption">
 Figure 2.3: The coefficient <span class="math inline">\(\phi\)</span> is set to 0.7
 </p>
@@ -296,7 +296,7 @@ where <span class="math inline">\(\psi_j =\phi^j\)</span> and <span class="math 
 <p> The stationarity condition holds <strong>if</strong> <span class="math inline">\(|\phi|\)</span> is lower than 1.</p>
 <p>Notice that ARMA(1,0) is an AR(1) and ARMA(0,1) is an MA(1).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:arma"></span>
-<img src="../../Downloads/Intro-to-Time-Series/arma.png" alt="The coefficient $\phi$ and $\theta$ are both set to 0.7" width="150%" />
+<img src="arma.png" alt="The coefficient $\phi$ and $\theta$ are both set to 0.7" width="150%" />
 <p class="caption">
 Figure 2.4: The coefficient <span class="math inline">\(\phi\)</span> and <span class="math inline">\(\theta\)</span> are both set to 0.7
 </p>
@@ -316,7 +316,7 @@ This time series is a sum of random shocks <span class="math inline">\(\epsilon_
 <p>The variance increases with <span class="math inline">\(t\)</span> <span class="math inline">\(\implies\)</span> the variance depends on time <span class="math inline">\(\implies\)</span> non-stationary process.</p>
 <p>The variance increases with <span class="math inline">\(t\)</span> <span class="math inline">\(\implies\)</span> the variance depends on time <span class="math inline">\(\implies\)</span> non-stationary process.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rw"></span>
-<img src="../../Downloads/Intro-to-Time-Series/rw.png" alt="Random Walk - Example" width="150%" />
+<img src="rw.png" alt="Random Walk - Example" width="150%" />
 <p class="caption">
 Figure 2.5: Random Walk - Example
 </p>
@@ -359,7 +359,7 @@ The <span class="math inline">\(t\)</span>-test follows a Student t-distribution
 <h2><span class="header-section-number">4.1</span> Impulse Response Function<a href="#impulse-response-function" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The Impulse Response Function, <span class="math inline">\(\widetilde{y}_{t}\)</span>, describes the expected response of a variable to an exogenous shock, which occurs at time <span class="math inline">\(t=s\)</span>. The shock could be of magnitude 1 or one standard deviation.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:irfshock"></span>
-<img src="../../Downloads/Intro-to-Time-Series/irfshock.png" alt="Impulse/shock: Fed Funds interest rate, Response: GDP" width="489" />
+<img src="irfshock.png" alt="Impulse/shock: Fed Funds interest rate, Response: GDP" width="489" />
 <p class="caption">
 Figure 4.1: Impulse/shock: Fed Funds interest rate, Response: GDP
 </p>
